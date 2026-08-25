@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MATRIX — FinTech Club | Finance × Technology × Innovation</title>
+  <link rel="icon" type="image/jpeg" href="logo_club.jpeg">
+  <link rel="shortcut icon" type="image/jpeg" href="logo_club.jpeg">
+  <link rel="apple-touch-icon" href="logo_club.jpeg">
+  <meta name="description"
+    content="MATRIX is a student-driven FinTech community exploring financial technology, markets, AI, blockchain, data, and entrepreneurship.">
+  <meta name="keywords" content="MATRIX, FinTech, Finance, Technology, Innovation, University Club">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bungee&family=Inter:wght@300;400;500;600;700;800;900&family=Manrope:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- ═══════════════════ NAVBAR ═══════════════════ -->
+  <nav id="navbar" class="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-brand" aria-label="MATRIX Home">
+        <img src="logo_club-removebg-preview.png" alt="MATRIX Logo" class="nav-logo">
+        <div class="nav-brand-text">
+          <span class="nav-brand-name">MATRIX</span>
+          <span class="nav-brand-sub">FinTech Club</span>
+        </div>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#domains">Domains</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#team">Team</a></li>
+      </ul>
+      <button type="button" class="nav-cta trigger-join-modal" id="navJoinBtn">Join MATRIX <span class="arrow">→</span></button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════ MOBILE MENU ═══════════════════ -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul class="mobile-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#domains">Domains</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><button type="button" class="mobile-cta trigger-join-modal">Join MATRIX →</button></li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════ HERO ═══════════════════ -->
+  <section id="hero" class="hero">
+    <canvas id="heroCanvas" class="hero-canvas"></canvas>
+    <div class="hero-overlay"></div>
+    <!-- HERO TEXT CONTENT AT TOP -->
+    <div class="hero-content">
+      <h1 class="hero-title reveal-up">MONEY FOR HERE,<br>THERE AND EVERYWHERE</h1>
+      <p class="hero-subtitle reveal-up">One place to manage your money. Save when you send, receive<br>and spend worldwide.</p>
+    </div>
+
+    <!-- 3D ORBIT STAGE WITH CENTER MATRIX CREST LOGO & 12 REVOLVING CIRCULAR BALL BADGES -->
+    <div class="hero-3d-orbit-stage reveal-up" id="hero3dOrbitStage">
+      <div class="hero-center-logo-box">
+        <img src="final_logo_nobg.png" alt="MATRIX Club Crest Emblem" class="hero-center-logo-img">
+      </div>
+      <div class="hero-orbit-items" id="heroOrbitItems">
+        <div class="hero-orbit-ball ball-black"><span><span class="highlight-letter">M</span>ARKETS</span></div>
+        <div class="hero-orbit-ball ball-white"><span><span class="highlight-letter">A</span>NALYTICS</span></div>
+        <div class="hero-orbit-ball ball-black"><span><span class="highlight-letter">T</span>ECHNOLOGY</span></div>
+        <div class="hero-orbit-ball ball-white"><span><span class="highlight-letter">R</span>ESEARCH</span></div>
+        <div class="hero-orbit-ball ball-black"><span><span class="highlight-letter">I</span>NNOVATION</span></div>
+        <div class="hero-orbit-ball ball-white"><span><span class="highlight-letter">X</span>CHANGE</span></div>
+        <div class="hero-orbit-ball ball-black"><span><span class="highlight-letter">C</span>APITAL</span></div>
+        <div class="hero-orbit-ball ball-white"><span><span class="highlight-letter">V</span>ENTURES</span></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════ ABOUT ═══════════════════ -->
+  <section id="about" class="about-pinned-section">
+    <div class="about-sticky-wrapper">
+      <div class="container">
+        <div class="section-label reveal-up">01 — ABOUT MATRIX</div>
+        <div class="about-grid">
+          <div class="about-left reveal-up">
+            <h2 class="section-title">A community built for the future of finance.</h2>
+            <div class="github-activity-card">
+              <div class="github-months">
+                <span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span>
+              </div>
+              <div class="github-grid" id="githubGrid"></div>
+              <div class="github-footer">
+                <span>Less</span>
+                <div class="github-legend">
+                  <span class="sq level-0"></span>
+                  <span class="sq level-1"></span>
+                  <span class="sq level-2"></span>
+                  <span class="sq level-3"></span>
+                  <span class="sq level-4"></span>
+                </div>
+                <span>More</span>
+              </div>
+            </div>
+          </div>
+          <div class="about-right reveal-up">
+            <div class="scroll-text-container" id="aboutScrollContainer">
+              <p class="about-scroll-text">MATRIX brings together visionary students interested in global finance,
+                financial technology, quantitative investment, artificial intelligence, blockchain architecture, data
+                science, and modern entrepreneurship.</p>
+              <p class="about-scroll-text">Our mission is to bridge the gap between academic theory and real-world
+                financial engineering. Through hands-on student projects, high-stakes hackathons, interactive trading
+                simulations, research publications, and direct mentorship from top industry leaders, MATRIX empowers the
+                next generation of financial innovators.</p>
+              <p class="about-scroll-text">Whether you are building algorithmic trading bots, exploring decentralized
+                finance protocols, or designing seamless global payment solutions, MATRIX provides the platform,
+                network, and resources to bring your ideas to life.</p>
+            </div>
+            <a href="#domains" class="text-link" style="margin-top:24px;">Our Mission <span class="arrow">→</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ DOMAINS ═══════════════════ -->
+  <section id="domains" class="domains-pinned-section">
+    <div class="domains-sticky-wrapper">
+      <div class="container">
+        <div class="domains-grid-layout">
+          <div class="domains-left reveal-up">
+            <div class="section-label">02 — DOMAINS</div>
+            <h2 class="section-title domains-title-50">Six dimensions of innovation.</h2>
+            <div class="domains-nav-controls">
+              <button type="button" class="domains-nav-btn prev-btn" id="domainsPrevBtn" aria-label="Previous Domain Card">←</button>
+              <button type="button" class="domains-nav-btn next-btn" id="domainsNextBtn" aria-label="Next Domain Card">→</button>
+              <span class="domains-counter-indicator" id="domainsCounter">01 / 06</span>
+            </div>
+          </div>
+          <div class="domains-right reveal-up">
+            <div class="domains-stack-wrapper">
+              <div class="domains-stack-container" id="domainsStack">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ EVENTS ═══════════════════ -->
+  <section id="events" class="section events">
+    <div class="container">
+      <div class="section-label reveal-up">03 — EVENTS</div>
+      <h2 class="section-title reveal-up">Where ideas become experiences.</h2>
+      <div class="events-tabs reveal-up">
+        <button class="tab-btn active" data-tab="upcoming">Upcoming</button>
+        <button class="tab-btn" data-tab="past">Past</button>
+      </div>
+    </div>
+    <div class="events-marquee-wrapper reveal-up">
+      <div class="events-marquee-track" id="eventsGrid">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ PROJECTS ═══════════════════ -->
+  <section id="projects" class="section projects-scatter-section">
+    <div class="projects-grid-bg"></div>
+    <div class="container">
+      <div class="section-label reveal-up">04 — PROJECTS</div>
+      <h2 class="section-title reveal-up">Building the future, one idea at a time.</h2>
+    </div>
+    <div class="projects-scatter-viewport reveal-up">
+      <div class="projects-scatter-container" id="projectsGrid">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ TEAM ═══════════════════ -->
+  <section id="team" class="section team-section">
+    <div class="container">
+      <div class="section-label reveal-up">05 — TEAM & MEMBERS</div>
+      <h2 class="section-title reveal-up">The people behind MATRIX.</h2>
+    </div>
+    <div class="team-marquee-wrapper reveal-up">
+      <div class="team-marquee-track" id="teamGrid">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ BENEFITS ═══════════════════ -->
+  <section id="benefits" class="section benefits">
+    <div class="benefits-bg-ticker" aria-hidden="true">
+      <div class="benefits-ticker-track">
+        <span>MATRIX &nbsp;•&nbsp; MATRIX &nbsp;•&nbsp; MATRIX &nbsp;•&nbsp; MATRIX &nbsp;•&nbsp;</span>
+        <span>MATRIX &nbsp;•&nbsp; MATRIX &nbsp;•&nbsp; MATRIX &nbsp;•&nbsp; MATRIX &nbsp;•&nbsp;</span>
+      </div>
+    </div>
+    <div class="container">
+      <h2 class="section-title center reveal-up">More Than a Club.</h2>
+      <div class="benefits-grid" id="benefitsGrid">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ FOOTER ═══════════════════ -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <!-- GIANT MANIFESTO TITLE -->
+      <h2 class="footer-manifesto reveal-up">
+        Finance
+        <svg class="plus-icon-spin" width="68" height="68" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+        Technology
+      </h2>
+
+      <!-- BRAND LOGO & DESCRIPTION ROW -->
+      <div class="footer-brand-row reveal-up">
+        <div class="footer-brand">
+          <img src="logo_club-removebg-preview.png" alt="MATRIX FinTech Logo" class="footer-logo-img">
+          <span class="footer-brand-title">MATRIX FinTech</span>
+        </div>
+        <p class="footer-mission-desc">
+          MATRIX is a student-led fintech ecosystem. We're bridging the gap between quantitative finance, cutting-edge
+          software engineering, and financial technology to shape the future of innovation. We call it Financial
+          Intelligence.
+        </p>
+      </div>
+
+      <!-- NAVIGATION COLUMNS & SOCIAL STRIP -->
+      <div class="footer-links-row reveal-up">
+        <div class="footer-col">
+          <span class="footer-col-title">Navigation</span>
+          <ul>
+            <li><a href="#about">ABOUT</a></li>
+            <li><a href="#domains">DOMAINS</a></li>
+            <li><a href="#events">EVENTS</a></li>
+            <li><a href="#projects">PROJECTS</a></li>
+            <li><a href="#team">TEAM</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <span class="footer-col-title">Connect</span>
+          <ul>
+            <li><a href="#" class="trigger-join-modal">JOIN US</a></li>
+            <li><a href="#">COLLECTIVE</a></li>
+            <li><a href="#">AFFILIATES</a></li>
+            <li><a href="#">WORKSHOPS</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <span class="footer-col-title">Trust</span>
+          <ul>
+            <li><a href="#">CONSTITUTION</a></li>
+            <li><a href="#">CODE OF CONDUCT</a></li>
+            <li><a href="#">TERMS</a></li>
+            <li><a href="#">PRIVACY</a></li>
+          </ul>
+        </div>
+
+        <!-- SOCIAL ICONS STRIP RIGHT ALIGNED -->
+        <div class="footer-social-strip">
+          <a href="#" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+            </svg></a>
+          <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+            </svg></a>
+          <a href="#" aria-label="X (Twitter)"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg></a>
+          <a href="#" aria-label="Discord"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z" />
+            </svg></a>
+          <a href="#" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+            </svg></a>
+        </div>
+      </div>
+
+      <!-- SECURITY BADGE & COPYRIGHT STRIP -->
+      <div class="footer-bottom-row reveal-up">
+        <div class="footer-cert-badge">
+          <div class="cert-icon-circle">MATRIX</div>
+          <div class="cert-text">
+            <strong>FinTech Excellence Certified</strong>
+            <span>Empowering future financial engineers & developers with industry-standard skills.</span>
+          </div>
+        </div>
+        <div class="footer-copyright">
+          MATRIX FINTECH CLUB © 2026. ALL RIGHTS RESERVED.
+        </div>
+      </div>
+    </div>
+  <!-- ═══════════════════ JOIN MATRIX SPREADSHEET MODAL ═══════════════════ -->
+  <div class="join-modal-backdrop" id="joinModalBackdrop" aria-hidden="true">
+    <div class="join-modal-container">
+      <button class="join-modal-close" id="closeJoinModalBtn" aria-label="Close modal">&times;</button>
+      <div class="join-modal-header">
+        <div class="join-modal-badge">MEMBER REGISTRATION</div>
+        <h2 class="join-modal-title">Join MATRIX FinTech Club</h2>
+        <p class="join-modal-subtitle">Enter your academic details below to connect with MATRIX.</p>
+      </div>
+
+      <form id="joinSpreadsheetForm" class="join-modal-form">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="studentName">Name <span class="req">*</span></label>
+            <input type="text" id="studentName" name="name" placeholder="Full Name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="regNumber">Registration Number <span class="req">*</span></label>
+            <input type="text" id="regNumber" name="regNumber" placeholder="Registration Number" required>
+          </div>
+
+          <div class="form-group">
+            <label for="rollNumber">Roll Number <span class="req">*</span></label>
+            <input type="text" id="rollNumber" name="rollNumber" placeholder="Roll Number" required>
+          </div>
+
+          <div class="form-group">
+            <label for="studentSchool">School <span class="req">*</span></label>
+            <input type="text" id="studentSchool" name="school" placeholder="School" required>
+          </div>
+
+          <div class="form-group">
+            <label for="studentDept">Department <span class="req">*</span></label>
+            <input type="text" id="studentDept" name="department" placeholder="Department" required>
+          </div>
+
+          <div class="form-group">
+            <label for="studentSection">Section <span class="req">*</span></label>
+            <input type="text" id="studentSection" name="section" placeholder="Section" required>
+          </div>
+
+          <div class="form-group">
+            <label for="currentYear">Current Year <span class="req">*</span></label>
+            <select id="currentYear" name="currentYear" required>
+              <option value="" disabled selected>Select Current Year</option>
+              <option value="1st Year">1st Year</option>
+              <option value="2nd Year">2nd Year</option>
+              <option value="3rd Year">3rd Year</option>
+              <option value="4th Year">4th Year</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="contactNumber">Contact Number <span class="req">*</span></label>
+            <input type="tel" id="contactNumber" name="contactNumber" placeholder="Contact Number" required>
+          </div>
+
+          <div class="form-group">
+            <label for="studentEmail">Gmail <span class="req">*</span></label>
+            <input type="email" id="studentEmail" name="gmail" placeholder="your.name@gmail.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="interestedDomain">Interested Domain <span class="req">*</span></label>
+            <select id="interestedDomain" name="interestedDomain" required>
+              <option value="" disabled selected>Select Interested Domain</option>
+              <option value="Quantitative Finance & Algo">Quantitative Finance & Algo</option>
+              <option value="AI & Machine Learning">AI & Machine Learning</option>
+              <option value="Blockchain & Crypto Web3">Blockchain & Crypto Web3</option>
+              <option value="Full-Stack Software Engineering">Full-Stack Software Engineering</option>
+              <option value="Trading & Financial Markets">Trading & Financial Markets</option>
+              <option value="Data Analytics & Research">Data Analytics & Research</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="join-submit-btn">
+            Submit Registration <span class="arrow">→</span>
+          </button>
+        </div>
+      </form>
+
+      <!-- Success Screen State -->
+      <div class="join-success-state" id="joinSuccessState" style="display: none;">
+        <div class="success-icon-circle">✓</div>
+        <h3>Welcome to MATRIX!</h3>
+        <p>Your registration details have been submitted successfully.</p>
+        <button class="join-done-btn" id="closeSuccessBtn">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
