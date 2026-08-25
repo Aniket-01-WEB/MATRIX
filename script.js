@@ -48,13 +48,13 @@ const PROJECTS = [
 ];
 
 const TEAM = [
-  { name:'Aniket', role:'Tech Lead', initials:'A' },
-  { name:'Souvik', role:'Faculty POC / Treasurer', initials:'S' },
-  { name:'Pritesh', role:'President', initials:'P' },
+  { name:'Aniket', role:'Tech Lead', initials:'A', image:'prof_file/aniket.jpeg', imgPos:'center 15%', imgSize:'cover' },
+  { name:'Souvik', role:'Faculty POC / Treasurer', initials:'S', image:'prof_file/souvik.jpeg', imgPos:'center 15%' },
+  { name:'Pritesh', role:'President', initials:'P', image:'prof_file/pritesh.jpeg', imgPos:'center 15%', imgSize:'185%' },
   { name:'Gourav', role:'Design Lead', initials:'G' },
   { name:'Shivam', role:'Vice President', initials:'S' },
-  { name:'Debjit', role:'Secretary', initials:'D' },
-  { name:'Jaydeep', role:'Marketing Lead', initials:'J' }
+  { name:'Debjit', role:'Secretary', initials:'D', image:'prof_file/debjit.jpeg', imgPos:'center 15%' },
+  { name:'Jaydeep', role:'Marketing Lead', initials:'J', image:'prof_file/jaydeep.jpeg', imgPos:'center 15%' }
 ];
 
 const BENEFITS = [
@@ -155,11 +155,15 @@ function renderTeam(){
   const displayList = [...TEAM, ...TEAM, ...TEAM, ...TEAM];
   g.innerHTML=displayList.map((m, i)=>{
     const theme = (i % 2 === 0) ? 'theme-white' : 'theme-black';
+    const bgPos = m.imgPos || 'center 15%';
+    const bgSize = m.imgSize || 'cover';
+    const bgStyle = m.image ? `background-image:url('${m.image}'); background-position:${bgPos}; background-size:${bgSize};` : '';
+    const hasBg = m.image ? 'has-bg-img' : '';
     return `
     <div class="team-card ${theme} flip-card" onclick="this.classList.toggle('flipped')">
       <div class="flip-card-inner">
-        <div class="flip-card-front">
-          <div class="team-avatar">${m.initials}</div>
+        <div class="flip-card-front ${hasBg}" style="${bgStyle}">
+          ${!m.image ? `<div class="team-avatar">${m.initials}</div>` : ''}
           <a href="#" class="team-linkedin" aria-label="LinkedIn" onclick="event.stopPropagation()">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
               <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
