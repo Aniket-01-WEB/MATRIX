@@ -48,10 +48,10 @@ const PROJECTS = [
 ];
 
 const TEAM = [
-  { name:'Aniket', role:'Tech Lead', initials:'A', image:'prof_file/aniket.jpeg', imgPos:'center 15%', imgSize:'cover' },
+  { name:'Aniket', role:'Tech Lead', initials:'A', image:'prof_file/Aniket.jpeg', imgPos:'center 15%' },
   { name:'Souvik', role:'Faculty POC / Treasurer', initials:'S', image:'prof_file/souvik.jpeg', imgPos:'center 15%' },
   { name:'Pritesh', role:'President', initials:'P', image:'prof_file/pritesh.jpeg', imgPos:'center 15%', imgSize:'185%' },
-  { name:'Gourav', role:'Design Lead', initials:'G' },
+  { name:'Gourav', role:'Design Lead', initials:'G', image:'prof_file/Gourav.jpeg', imgPos:'center 15%' },
   { name:'Shivam', role:'Vice President', initials:'S' },
   { name:'Debjit', role:'Secretary', initials:'D', image:'prof_file/debjit.jpeg', imgPos:'center 15%' },
   { name:'Jaydeep', role:'Marketing Lead', initials:'J', image:'prof_file/jaydeep.jpeg', imgPos:'center 15%' }
@@ -173,7 +173,6 @@ function renderTeam(){
         </div>
         <div class="flip-card-back">
           <h3 class="team-name">${m.name}</h3>
-          <span class="team-role-label">${m.role}</span>
         </div>
       </div>
     </div>
