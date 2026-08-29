@@ -1,15 +1,5 @@
-/* ═══════════════════════════════════════════════════
-   MATRIX — FinTech Club | Script
-   ═══════════════════════════════════════════════════ */
-
-/* ==========================================================================
-   CONFIGURATIONS — GOOGLE SHEETS INTEGRATION
-   Paste your deployed Google Apps Script Web App URL ending in /exec below.
-   Example: 'https://script.google.com/macros/s/AKfycb.../exec'
-   ========================================================================== */
 const GOOGLE_SHEET_WEBHOOK_URL = 'PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE';
 
-// ─── DATA (easily editable) ───
 const DOMAINS = [
   { num:'01', title:'FinTech Architecture', desc:'Engineering next-generation digital payment rails, core banking infrastructure, microservices, and cross-border API protocols.', highlights:['Core Payment Systems & ISO20022 Protocols','Open Banking & API Interoperability','Low-Latency Micro-Transaction Infrastructure'], stats:'4 Active Projects • 24 Technical Workshops', tags:['Payment Rails','Open Banking','Micro-Transactions'], icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>' },
   { num:'02', title:'Markets & Quantitative Investment', desc:'Understanding global capital markets, algorithmic trading strategies, portfolio optimization, and stochastic financial modeling.', highlights:['High-Frequency Algorithmic Execution','Portfolio Optimization & Black-Litterman Models','Risk Analytics & Monte Carlo Simulations'], stats:'$500K Simulated Portfolio • 18 Quant Models', tags:['Algo Trading','Portfolio Mgmt','Risk Analytics'], icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>' },
@@ -20,7 +10,6 @@ const DOMAINS = [
 ];
 
 const EVENTS = [
-  // Upcoming
   { name:'MATRIX FinTech Summit 2026', date:'Mar 15, 2026', location:'Main Auditorium', category:'Summit', desc:'Flagship summit uniting global industry founders, investors, and student innovators exploring the future of global finance.', status:'upcoming', color:'#0f172a' },
   { name:'Quantitative Trading Masterclass', date:'Feb 22, 2026', location:'Lab 301', category:'Workshop', desc:'Deep dive into systematic market analysis, high-frequency execution, and algorithmic trading strategies.', status:'upcoming', color:'#1e293b' },
   { name:'AI × Finance National Hackathon', date:'Apr 5, 2026', location:'Tech Center', category:'Hackathon', desc:'48-hour national hackathon challenging student developers to build AI-powered credit, risk, and trading bots.', status:'upcoming', color:'#334155' },
@@ -28,7 +17,6 @@ const EVENTS = [
   { name:'DeFi & Tokenomics Symposium', date:'May 2, 2026', location:'Auditorium B', category:'Symposium', desc:'Panel discussion featuring blockchain architects on automated market makers, ZK proofs, and liquidity pools.', status:'upcoming', color:'#0f172a' },
   { name:'Venture Pitching & Angel Sandbox', date:'May 18, 2026', location:'Venture Hub', category:'Sandbox', desc:'Pitch session where student fintech startups present MVPs directly to institutional angel investors.', status:'upcoming', color:'#1e293b' },
   
-  // Past
   { name:'Blockchain & Web3 Security Workshop', date:'Jan 18, 2026', location:'Innovation Hub', category:'Workshop', desc:'Hands-on workshop exploring smart contract auditing, vulnerability scanning, and decentralized protocols.', status:'past', color:'#475569' },
   { name:'Global FinTech Founder Fireside', date:'Dec 10, 2025', location:'Conference Hall', category:'Fireside', desc:'An exclusive evening with unicorn fintech founders sharing their journey from MVP to valuation.', status:'past', color:'#334155' },
   { name:'Automated Credit Scoring Challenge', date:'Nov 28, 2025', location:'Data Science Lab', category:'Challenge', desc:'Intense 24-hour machine learning competition targeting alternative data credit risk modeling.', status:'past', color:'#1e293b' },
@@ -73,7 +61,6 @@ const RESOURCES = [
   { title:'Emerging Trends in Digital Banking', category:'Research', date:'Mar 2026', desc:'Research paper on the evolution of neobanks and the future of digital-only financial services.' }
 ];
 
-// ─── POPULATE DOM ───
 function renderDomains(){
   const stack = document.getElementById('domainsStack');
   if(!stack) return;
@@ -109,13 +96,13 @@ function renderEvents(filter='upcoming'){
   const g=document.getElementById('eventsGrid'); if(!g) return;
   const filtered=EVENTS.filter(e=>e.status===filter);
   if(!filtered.length) return;
-  // Duplicate array 3x for seamless smooth horizontal marquee infinite scroll
-  const displayList = [...filtered, ...filtered, ...filtered];
+  const displayList = [...filtered, ...filtered, ...filtered, ...filtered];
+  g.dataset.originalCount = filtered.length;
   g.innerHTML=displayList.map((e, i)=>{
     const theme = (i % 2 === 0) ? 'theme-white' : 'theme-black';
     return `
     <div class="event-card ${theme}">
-      <div class="event-image" style="background:linear-gradient(135deg,${e.color}dd,${e.color}99),var(--bg-3)">
+      <div class="event-image">
         <span class="event-category">${e.category}</span>
       </div>
       <div class="event-body">
@@ -129,6 +116,7 @@ function renderEvents(filter='upcoming'){
       </div>
     </div>
   `}).join('');
+  if (g.__resetMarquee) g.__resetMarquee();
 }
 function renderProjects(){
   const g=document.getElementById('projectsGrid'); if(!g) return;
@@ -151,8 +139,8 @@ function renderProjects(){
 }
 function renderTeam(){
   const g=document.getElementById('teamGrid'); if(!g) return;
-  // Duplicate array 4x for continuous seamless reverse horizontal marquee infinite scroll
   const displayList = [...TEAM, ...TEAM, ...TEAM, ...TEAM];
+  g.dataset.originalCount = TEAM.length;
   g.innerHTML=displayList.map((m, i)=>{
     const theme = (i % 2 === 0) ? 'theme-white' : 'theme-black';
     const bgPos = m.imgPos || 'center 15%';
@@ -177,6 +165,7 @@ function renderTeam(){
       </div>
     </div>
   `}).join('');
+  if (g.__resetMarquee) g.__resetMarquee();
 }
 function renderBenefits(){
   const g=document.getElementById('benefitsGrid'); if(!g) return;
@@ -187,7 +176,6 @@ function renderResources(){
   g.innerHTML=RESOURCES.map(r=>`<div class="resource-card reveal-up" data-category="${r.category}"><span class="resource-category">${r.category}</span><h3 class="resource-title">${r.title}</h3><p class="resource-date">${r.date}</p><p class="resource-desc">${r.desc}</p><a href="#" class="text-link">Read More <span class="arrow">→</span></a></div>`).join('');
 }
 
-// ─── SCROLL REVEAL ───
 function initReveal(){
   const obs=new IntersectionObserver((entries)=>{
     entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('revealed');obs.unobserve(e.target)}});
@@ -195,13 +183,20 @@ function initReveal(){
   document.querySelectorAll('.reveal-up:not(.revealed)').forEach(el=>obs.observe(el));
 }
 
-// ─── NAVBAR ───
 function initNavbar(){
   const nav=document.getElementById('navbar');
   const toggle=document.getElementById('navToggle');
   const menu=document.getElementById('mobileMenu');
+  const aboutSec=document.getElementById('about');
   let open=false;
-  window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>60)});
+  window.addEventListener('scroll',()=>{
+    nav.classList.toggle('scrolled',window.scrollY>60);
+    if(aboutSec) {
+      const rect = aboutSec.getBoundingClientRect();
+      const isOverAbout = rect.top <= 120 && rect.bottom >= 60;
+      nav.classList.toggle('pink-nav', isOverAbout);
+    }
+  });
   toggle.addEventListener('click',()=>{
     open=!open;
     menu.classList.toggle('open',open);
@@ -211,9 +206,57 @@ function initNavbar(){
   menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
     open=false;menu.classList.remove('open');toggle.classList.remove('active');document.body.style.overflow='';
   }));
+
+  initDockMagnification();
 }
 
-// ─── EVENT TABS ───
+function initDockMagnification() {
+  const container = document.getElementById('navLinks');
+  if (!container) return;
+
+  const items = container.querySelectorAll('li');
+  const distance = 140;
+  const maxScale = 1.45;
+
+  container.addEventListener('mousemove', (e) => {
+    const mouseX = e.clientX;
+
+    items.forEach((item) => {
+      const rect = item.getBoundingClientRect();
+      const itemCenterX = rect.left + rect.width / 2;
+      const d = Math.abs(mouseX - itemCenterX);
+
+      if (d < distance) {
+        const norm = (1 - d / distance);
+        const scale = 1 + (maxScale - 1) * Math.pow(Math.cos((d / distance) * (Math.PI / 2)), 2);
+        const translateY = -5 * norm;
+        item.style.transform = `scale(${scale.toFixed(3)}) translateY(${translateY.toFixed(2)}px)`;
+        item.style.zIndex = '10';
+
+        const link = item.querySelector('a');
+        if (link) {
+          const weight = Math.round(500 + 280 * norm);
+          link.style.fontWeight = `${weight}`;
+        }
+      } else {
+        item.style.transform = 'scale(1) translateY(0px)';
+        item.style.zIndex = '1';
+        const link = item.querySelector('a');
+        if (link) link.style.fontWeight = '';
+      }
+    });
+  });
+
+  container.addEventListener('mouseleave', () => {
+    items.forEach((item) => {
+      item.style.transform = 'scale(1) translateY(0px)';
+      item.style.zIndex = '1';
+      const link = item.querySelector('a');
+      if (link) link.style.fontWeight = '';
+    });
+  });
+}
+
 function initEventTabs(){
   document.querySelectorAll('.tab-btn').forEach(btn=>{
     btn.addEventListener('click',()=>{
@@ -224,7 +267,6 @@ function initEventTabs(){
   });
 }
 
-// ─── RESOURCE FILTER & SEARCH ───
 function initResourceFilters(){
   const cards=()=>document.querySelectorAll('.resource-card');
   document.querySelectorAll('.filter-btn').forEach(btn=>{
@@ -246,7 +288,6 @@ function initResourceFilters(){
   });
 }
 
-// ─── SEQUENTIAL TIMELINE COUNTER ANIMATION ───
 function initCounters(){
   const items = document.querySelectorAll('.stat-item');
   if(!items.length) return;
@@ -305,7 +346,6 @@ function initCounters(){
   }
 }
 
-// ─── HERO CANVAS ───
 class MatrixCanvas{
   constructor(canvas,opts={}){
     this.canvas=canvas;this.ctx=canvas.getContext('2d');
@@ -347,17 +387,14 @@ class MatrixCanvas{
     const c=this.ctx;
     c.clearRect(0,0,this.w,this.h);
     this.drawGrid();
-    // update & draw particles
     for(const p of this.particles){
       p.x+=p.vx;p.y+=p.vy;
       if(p.x<0||p.x>this.w)p.vx*=-1;
       if(p.y<0||p.y>this.h)p.vy*=-1;
-      // mouse interaction
       const dx=this.mouse.x-p.x,dy=this.mouse.y-p.y;
       const dist=Math.sqrt(dx*dx+dy*dy);
       if(dist<180){p.x-=dx*.005;p.y-=dy*.005}
     }
-    // connections
     for(let i=0;i<this.particles.length;i++){
       for(let j=i+1;j<this.particles.length;j++){
         const a=this.particles[i],b=this.particles[j];
@@ -370,7 +407,6 @@ class MatrixCanvas{
         }
       }
     }
-    // dots
     for(const p of this.particles){
       c.beginPath();c.arc(p.x,p.y,p.r,0,Math.PI*2);
       if(p.type==='node'){c.fillStyle=`rgba(${this.opts.color},.6)`;c.fill();
@@ -381,14 +417,12 @@ class MatrixCanvas{
   }
 }
 
-// ─── ABOUT CANVAS (smaller) ───
 function initAboutCanvas(){
   const c=document.getElementById('aboutCanvas');
   if(!c)return;
   new MatrixCanvas(c,{count:20,maxDist:100});
 }
 
-// ─── 3D REVOLVING CIRCULAR BALL BADGE ORBIT ANIMATION (SUBTLE TILT) ───
 function initOrbit() {
   const stage = document.getElementById('hero3dOrbitStage');
   if (!stage) return;
@@ -397,45 +431,34 @@ function initOrbit() {
   if (!balls.length) return;
 
   const total = balls.length;
-  let angleOffset = 0;
 
-  function animateOrbit() {
-    angleOffset += 0.0035;
-
+  function positionBallsStatic() {
     const isMobile = window.innerWidth < 600;
-    const radius = isMobile ? 260 : Math.min(stage.offsetWidth * 0.48, 620);
-    const tiltAngle = 0.24; // Tilted to the opposite side (+14 degrees)
-    const cosTilt = Math.cos(tiltAngle);
-    const sinTilt = Math.sin(tiltAngle);
+    const isTablet = window.innerWidth < 992;
+
+    const radiusX = isMobile ? 180 : (isTablet ? 340 : Math.min(stage.offsetWidth * 0.44, 560));
+    const radiusY = isMobile ? 160 : (isTablet ? 140 : 185);
 
     for (let i = 0; i < total; i++) {
       const ball = balls[i];
-      const angle = angleOffset + (i / total) * Math.PI * 2;
+      const angle = (i / total) * Math.PI * 2 - Math.PI / 2;
 
-      const circleX = Math.cos(angle) * radius;
-      const circleZ = Math.sin(angle) * radius;
+      const x = Math.cos(angle) * radiusX;
+      const y = Math.sin(angle) * radiusY;
 
-      const x = circleX;
-      const y = circleZ * sinTilt; // Subtle Y elevation tilt
-      const z = circleZ * cosTilt;
-
-      const normalizedDepth = (z + radius) / (2 * radius);
-      
-      const scale = 0.72 + normalizedDepth * 0.42;
-      const zIndex = z > 0 ? 10 : 2;
-
-      ball.style.transform = `translate3d(calc(-50% + ${x}px), calc(-50% + ${y}px), ${z}px) scale(${scale})`;
+      ball.style.position = 'absolute';
+      ball.style.top = '50%';
+      ball.style.left = '50%';
+      ball.style.transform = `translate3d(calc(-50% + ${x}px), calc(-50% + ${y}px), 0) scale(0.92)`;
       ball.style.opacity = '1';
-      ball.style.zIndex = zIndex;
+      ball.style.zIndex = '10';
     }
-
-    requestAnimationFrame(animateOrbit);
   }
 
-  requestAnimationFrame(animateOrbit);
+  positionBallsStatic();
+  window.addEventListener('resize', positionBallsStatic);
 }
 
-// ─── SMOOTH SCROLL ───
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.addEventListener('click',e=>{
     const target=document.querySelector(a.getAttribute('href'));
@@ -443,7 +466,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
   });
 });
 
-// ─── SCROLL-DRIVEN LETTER-BY-LETTER FILL EFFECT IN ABOUT SECTION ───
 function initAboutScroll(){
   const container = document.getElementById('aboutScrollContainer');
   if(!container) return;
@@ -494,7 +516,6 @@ function initAboutScroll(){
   updateCharFill();
 }
 
-// ─── GITHUB CONTRIBUTION GRID (MATRIX PIXEL BITMAP) ───
 function initGithubGrid(){
   const grid = document.getElementById('githubGrid');
   if(!grid) return;
@@ -549,7 +570,7 @@ function initGithubGrid(){
     const rows = 7;
     let html = '';
 
-    const totalWordWidth = 33; // M(5)+1+A(5)+1+T(5)+1+R(5)+1+I(3)+1+X(5)
+    const totalWordWidth = 33;
     const startCol = Math.max(1, Math.floor((cols - totalWordWidth) / 2));
 
     const pixelMap = {};
@@ -584,177 +605,362 @@ function initGithubGrid(){
   window.addEventListener('resize', renderGrid);
 }
 
-// ─── DOMAINS SLIDER & DECK STACK CONTROLS ───
 function initDomainsScrollStack(){
-  const container = document.getElementById('domainsStack');
-  if(!container) return;
+  const section = document.querySelector('.domains-squeeze-section');
+  const squeezeText = document.getElementById('domainsSqueezeText');
 
-  const cards = container.querySelectorAll('.domain-card-stack');
-  const prevBtn = document.getElementById('domainsPrevBtn');
-  const nextBtn = document.getElementById('domainsNextBtn');
-  const counter = document.getElementById('domainsCounter');
+  if(!section || !squeezeText) return;
 
-  if(!cards.length) return;
+  if(window.innerWidth <= 768) return;
 
-  let currentIndex = 0;
-  const totalCards = cards.length;
+  function updateScale() {
+    const rect = section.getBoundingClientRect();
+    const sectionHeight = rect.height;
+    const viewportH = window.innerHeight;
+    const scrollableDistance = sectionHeight - viewportH;
 
-  function updateDeck() {
-    cards.forEach((card, i) => {
-      if (i === currentIndex) {
-        // Front active card
-        card.style.transform = `translateX(0) translateY(0) scale(1)`;
-        card.style.opacity = '1';
-        card.style.zIndex = '20';
-        card.style.pointerEvents = 'auto';
-      } else if (i > currentIndex) {
-        // Stacked in the deck behind
-        const offset = i - currentIndex;
-        const translateY = -offset * 14;
-        const scale = 1 - offset * 0.04;
-        const opacity = offset <= 3 ? (1 - offset * 0.15) : 0;
-        card.style.transform = `translateX(0) translateY(${translateY}px) scale(${scale})`;
-        card.style.opacity = opacity.toString();
-        card.style.zIndex = (10 - offset).toString();
-        card.style.pointerEvents = 'none';
-      } else {
-        // Slid out to the left
-        card.style.transform = `translateX(-115%) translateY(0) scale(0.9)`;
-        card.style.opacity = '0';
-        card.style.zIndex = '1';
-        card.style.pointerEvents = 'none';
-      }
-    });
+    if(scrollableDistance <= 0) return;
 
-    if (counter) {
-      const numStr = (currentIndex + 1).toString().padStart(2, '0');
-      const totalStr = totalCards.toString().padStart(2, '0');
-      counter.textContent = `${numStr} / ${totalStr}`;
-    }
+    const scrolled = -rect.top;
+    let progress = Math.max(0, Math.min(1, scrolled / scrollableDistance));
 
-    if (prevBtn) prevBtn.disabled = currentIndex === 0;
-    if (nextBtn) nextBtn.disabled = currentIndex === totalCards - 1;
+    const scale = 1.0 - (progress * 0.3);
+    squeezeText.style.transform = `scale(${scale.toFixed(4)})`;
+    squeezeText.style.opacity = '1';
   }
 
-  function goToNext() {
-    if (currentIndex < totalCards - 1) {
-      currentIndex++;
-      updateDeck();
-    }
-  }
+  window.addEventListener('scroll', updateScale, { passive: true });
+  updateScale();
+}
 
-  function goToPrev() {
-    if (currentIndex > 0) {
-      currentIndex--;
-      updateDeck();
-    }
-  }
+function initInteractiveMarquee(wrapperSelector, speedPxPerSec = 85) {
+  const wrapper = typeof wrapperSelector === 'string' ? document.querySelector(wrapperSelector) : wrapperSelector;
+  if (!wrapper) return;
+  const track = wrapper.firstElementChild;
+  if (!track) return;
 
-  if (prevBtn) prevBtn.addEventListener('click', goToPrev);
-  if (nextBtn) nextBtn.addEventListener('click', goToNext);
-
-  // Touch and Mouse Swipe/Drag Support (Right-to-Left: Next card appears | Left-to-Right: Prev card returns)
-  let startX = 0;
-  let startY = 0;
-  let currentX = 0;
   let isDragging = false;
+  let isWheelScrolling = false;
+  let startX = 0;
+  let dragStartX = 0;
+  let currentX = 0;
+  let wheelTimeout = null;
+  let animId = null;
+  let dragMoved = false;
+  let lastTime = performance.now();
 
-  function handleStart(e) {
-    isDragging = true;
-    const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
-    const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
-    startX = clientX;
-    startY = clientY;
-    currentX = startX;
+  function getSingleSetWidth() {
+    const originalCount = parseInt(track.dataset.originalCount, 10) || Math.floor(track.children.length / 4);
+    if (!track.children || track.children.length <= originalCount) return 0;
+    const firstChild = track.children[0];
+    const targetChild = track.children[originalCount];
+    if (!firstChild || !targetChild) return 0;
+    const dist = targetChild.offsetLeft - firstChild.offsetLeft;
+    if (dist > 0) return dist;
+    const reps = 4;
+    return track.scrollWidth / reps;
   }
 
-  function handleMove(e) {
-    if (!isDragging) return;
-    const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
-    const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
-    currentX = clientX;
+  function wrapX() {
+    const setWidth = getSingleSetWidth();
+    if (!setWidth || setWidth <= 0) return;
 
-    // Prevent default browser back/forward swipe history navigation
-    const diffX = Math.abs(currentX - startX);
-    const diffY = Math.abs(clientY - startY);
-    if (diffX > diffY && diffX > 10) {
-      if (e.cancelable) e.preventDefault();
+    while (currentX >= setWidth) {
+      currentX -= setWidth;
+    }
+    while (currentX < 0) {
+      currentX += setWidth;
     }
   }
 
-  function handleEnd() {
+  function applyTransform() {
+    track.style.transform = `translate3d(${-currentX}px, 0, 0)`;
+  }
+
+  function resetMarquee() {
+    currentX = 0;
+    applyTransform();
+  }
+
+  track.__resetMarquee = resetMarquee;
+
+  function tick(now) {
+    const dt = Math.min((now - lastTime) / 1000, 0.1);
+    lastTime = now;
+
+    if (!isDragging && !isWheelScrolling) {
+      currentX += speedPxPerSec * dt;
+      wrapX();
+      applyTransform();
+    }
+    animId = requestAnimationFrame(tick);
+  }
+
+  if (animId) cancelAnimationFrame(animId);
+  lastTime = performance.now();
+  animId = requestAnimationFrame(tick);
+
+  wrapper.addEventListener('wheel', (e) => {
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 2) {
+      isWheelScrolling = true;
+      currentX += e.deltaX;
+      wrapX();
+      applyTransform();
+
+      if (wheelTimeout) clearTimeout(wheelTimeout);
+      wheelTimeout = setTimeout(() => {
+        isWheelScrolling = false;
+      }, 600);
+    }
+  }, { passive: true });
+
+  wrapper.addEventListener('pointerdown', (e) => {
+    if (e.button !== 0) return;
+    isDragging = true;
+    dragMoved = false;
+    startX = e.clientX;
+    dragStartX = currentX;
+    wrapper.style.cursor = 'grabbing';
+  });
+
+  window.addEventListener('pointermove', (e) => {
+    if (!isDragging) return;
+    const dx = e.clientX - startX;
+    if (Math.abs(dx) > 4) dragMoved = true;
+    currentX = dragStartX - dx;
+    wrapX();
+    applyTransform();
+  });
+
+  const stopDrag = () => {
     if (!isDragging) return;
     isDragging = false;
-    const diffX = currentX - startX;
-    // Swiping Right-to-Left (finger/mouse moves left) -> Next card appears!
-    if (diffX < -30) {
-      goToNext();
-    } 
-    // Swiping Left-to-Right (finger/mouse moves right) -> Previous card returns!
-    else if (diffX > 30) {
-      goToPrev();
-    }
-  }
+    wrapper.style.cursor = 'grab';
+  };
 
-  container.addEventListener('touchstart', handleStart, { passive: true });
-  container.addEventListener('touchmove', handleMove, { passive: false });
-  container.addEventListener('touchend', handleEnd, { passive: true });
+  window.addEventListener('pointerup', stopDrag);
+  window.addEventListener('pointercancel', stopDrag);
 
-  container.addEventListener('mousedown', handleStart);
-  window.addEventListener('mousemove', handleMove);
-  window.addEventListener('mouseup', handleEnd);
-
-  // Trackpad Horizontal Scroll Support
-  let wheelLock = false;
-  container.addEventListener('wheel', (e) => {
-    if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 20) {
+  wrapper.addEventListener('click', (e) => {
+    if (dragMoved) {
       e.preventDefault();
-      if (wheelLock) return;
-      wheelLock = true;
-      setTimeout(() => { wheelLock = false; }, 320);
-      if (e.deltaX > 0) {
-        goToNext();
+      e.stopPropagation();
+      dragMoved = false;
+    }
+  }, true);
+}
+
+function init3dTeamCards() {
+  const teamGrid = document.getElementById('teamGrid');
+  if (!teamGrid) return;
+
+  teamGrid.addEventListener('mousemove', (e) => {
+    const card = e.target.closest('.team-card');
+    if (!card) return;
+
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = -((y - centerY) / centerY) * 16;
+    const rotateY = ((x - centerX) / centerX) * 16;
+
+    const inner = card.querySelector('.flip-card-inner');
+    if (inner) {
+      if (card.classList.contains('flipped')) {
+        inner.style.transform = `rotateY(180deg) rotateX(${-rotateX}deg) rotateZ(${-rotateY * 0.25}deg) scale3d(1.05, 1.05, 1.05)`;
       } else {
-        goToPrev();
+        inner.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
       }
     }
-  }, { passive: false });
+  });
 
-  updateDeck();
+  teamGrid.addEventListener('mouseout', (e) => {
+    const card = e.target.closest('.team-card');
+    if (!card) return;
+    const related = e.relatedTarget;
+    if (related && card.contains(related)) return;
+
+    const inner = card.querySelector('.flip-card-inner');
+    if (inner) {
+      if (card.classList.contains('flipped')) {
+        inner.style.transform = 'rotateY(180deg)';
+      } else {
+        inner.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+      }
+    }
+  });
 }
 
-// ─── PROJECTS SCATTER (STATIC - SCROLL ANIMATION REMOVED) ───
-function initProjectsScatterScroll() {
-  // Static: projects remain fixed in position with no scroll-driven parallax or movement
-}
-
-// ─── INIT ───
 document.addEventListener('DOMContentLoaded',()=>{
-  renderDomains();renderEvents();renderProjects();renderTeam();renderBenefits();renderResources();
+  renderEvents();renderProjects();renderTeam();renderBenefits();renderResources();
   initReveal();initNavbar();initEventTabs();initResourceFilters();initCounters();
-  // Hero canvas
+  initInteractiveMarquee('.events-marquee-wrapper', 85);
+  initInteractiveMarquee('.team-marquee-wrapper', -85);
+  init3dTeamCards();
   const hc=document.getElementById('heroCanvas');
   if(hc) new MatrixCanvas(hc,{count:60,maxDist:150});
-  // CTA canvas
   const cc=document.getElementById('ctaCanvas');
   if(cc) new MatrixCanvas(cc,{count:30,maxDist:120});
   initAboutCanvas();
   initAboutScroll();
   initGithubGrid();
   initDomainsScrollStack();
-  // Orbit animation
   initOrbit();
-  // Axe Cursor rotation
   initAxeCursorRotation();
-  // 3D Saturn CTA Orbit
   initCta3dOrbit();
-  // Join MATRIX Modal
+  initHeroMoneyTicker();
+  initAboutVariableText();
   initJoinModal();
-  // stagger reveal
+  initPreventTopOverscroll();
   document.querySelectorAll('.reveal-up').forEach((el,i)=>{el.style.transitionDelay=`${Math.min(i*.06,.4)}s`});
 });
 
-// ─── JOIN MATRIX SPREADSHEET MODAL ───
+function initPreventTopOverscroll() {
+  window.addEventListener('wheel', (e) => {
+    if (window.scrollY <= 0 && e.deltaY < 0) {
+      e.preventDefault();
+    }
+  }, { passive: false });
+}
+
+function initAboutVariableText() {
+  const aboutSection = document.getElementById('about');
+  if (!aboutSection) return;
+
+  const targetEls = aboutSection.querySelectorAll('.habito-about-subtitle, .habito-about-desc');
+
+  targetEls.forEach(el => {
+    const childNodes = Array.from(el.childNodes);
+    el.innerHTML = '';
+
+    childNodes.forEach(node => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        const text = node.textContent;
+        const parts = text.split(/(\s+)/);
+        parts.forEach(w => {
+          if (w.trim().length > 0) {
+            const span = document.createElement('span');
+            span.className = 'v-word';
+            span.textContent = w;
+            el.appendChild(span);
+          } else if (w.length > 0) {
+            el.appendChild(document.createTextNode(w));
+          }
+        });
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        if (node.tagName === 'STRONG') {
+          const text = node.textContent;
+          const parts = text.split(/(\s+)/);
+          parts.forEach(w => {
+            if (w.trim().length > 0) {
+              const span = document.createElement('span');
+              span.className = 'v-word v-strong';
+              span.textContent = w;
+              el.appendChild(span);
+            } else if (w.length > 0) {
+              el.appendChild(document.createTextNode(w));
+            }
+          });
+        } else {
+          el.appendChild(node);
+        }
+      }
+    });
+  });
+
+  const allWords = aboutSection.querySelectorAll('.v-word');
+  if (!allWords.length) return;
+
+  const radius = 200;
+  const minWeight = 300;
+  const maxWeight = 850;
+
+  let ticking = false;
+  let mouseX = -9999;
+  let mouseY = -9999;
+
+  function updateWeights() {
+    allWords.forEach(word => {
+      const rect = word.getBoundingClientRect();
+      const wordX = rect.left + rect.width / 2;
+      const wordY = rect.top + rect.height / 2;
+
+      const dist = Math.hypot(mouseX - wordX, mouseY - wordY);
+
+      if (dist < radius) {
+        const norm = 1 - (dist / radius);
+        const falloff = Math.pow(norm, 1.3);
+        const weight = Math.round(minWeight + (maxWeight - minWeight) * falloff);
+        const scale = 1 + (0.06 * falloff);
+
+        word.style.fontWeight = weight;
+        word.style.transform = `scale(${scale.toFixed(3)})`;
+        word.style.color = '#000000';
+      } else {
+        word.style.fontWeight = word.classList.contains('v-strong') ? '700' : '300';
+        word.style.transform = '';
+        word.style.color = '';
+      }
+    });
+
+    ticking = false;
+  }
+
+  aboutSection.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(updateWeights);
+    }
+  });
+
+  aboutSection.addEventListener('mouseleave', () => {
+    mouseX = -9999;
+    mouseY = -9999;
+    allWords.forEach(word => {
+      word.style.fontWeight = word.classList.contains('v-strong') ? '700' : '300';
+      word.style.transform = '';
+      word.style.color = '';
+    });
+  });
+}
+
+function initHeroMoneyTicker() {
+  const el = document.getElementById('heroMoneyTicker');
+  if (!el) return;
+
+  const words = [
+    'MONEY',
+    'पैसा',
+    'টাকা',
+    'お金',
+    '钱',
+    'Dinero',
+    'Argent',
+    'مال',
+    'Деньги'
+  ];
+
+  let currentIndex = 0;
+
+  function rotateWord() {
+    const currentWord = words[currentIndex];
+    const holdDuration = (currentWord === 'MONEY') ? 3000 : 200;
+
+    setTimeout(() => {
+      currentIndex = (currentIndex + 1) % words.length;
+      el.textContent = words[currentIndex];
+      rotateWord();
+    }, holdDuration);
+  }
+
+  rotateWord();
+}
+
 function initJoinModal() {
   const backdrop = document.getElementById('joinModalBackdrop');
   const openBtn = document.getElementById('joinMatrixBtn');
@@ -784,31 +990,26 @@ function initJoinModal() {
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
   if (closeSuccessBtn) closeSuccessBtn.addEventListener('click', closeModal);
 
-  // Trigger modal for any element with class 'trigger-join-modal' or nav CTA buttons
   document.querySelectorAll('.trigger-join-modal, .nav-cta').forEach(btn => {
     btn.addEventListener('click', openModal);
   });
 
-  // Close when clicking outside modal container
   backdrop.addEventListener('click', (e) => {
     if (e.target === backdrop) closeModal();
   });
 
-  // Close on Escape key
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && backdrop.classList.contains('active')) {
       closeModal();
     }
   });
 
-  // Handle Form Submission
   if (form) {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       const submitBtn = form.querySelector('.join-submit-btn');
 
-      // Check if GOOGLE_SHEET_WEBHOOK_URL is configured properly
       const isUnconfigured = !GOOGLE_SHEET_WEBHOOK_URL ||
         GOOGLE_SHEET_WEBHOOK_URL.trim() === '' ||
         GOOGLE_SHEET_WEBHOOK_URL.includes('PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE');
@@ -819,14 +1020,11 @@ function initJoinModal() {
         return;
       }
 
-      // Disable button to prevent duplicate submissions
       if (submitBtn) {
         submitBtn.disabled = true;
         submitBtn.textContent = 'Submitting...';
       }
 
-      // Collect spreadsheet row data matching all 10 columns exactly:
-      // A=name, B=regNumber, C=rollNumber, D=school, E=department, F=section, G=currentYear, H=contactNumber, I=gmail, J=interestedDomain
       const formData = {
         name: document.getElementById('studentName')?.value?.trim() || '',
         regNumber: document.getElementById('regNumber')?.value?.trim() || '',
@@ -842,7 +1040,6 @@ function initJoinModal() {
 
       console.log('MATRIX Registration Data Submission:', formData);
 
-      // Backup to localStorage
       try {
         const savedMembers = JSON.parse(localStorage.getItem('matrixMembers') || '[]');
         savedMembers.push({ ...formData, timestamp: new Date().toISOString() });
@@ -851,7 +1048,6 @@ function initJoinModal() {
         console.warn('LocalStorage backup error:', backupErr);
       }
 
-      // Submit via POST to Google Apps Script Web App URL
       try {
         const bodyData = new URLSearchParams(formData);
         await fetch(GOOGLE_SHEET_WEBHOOK_URL, {
@@ -863,7 +1059,6 @@ function initJoinModal() {
           body: bodyData.toString()
         });
 
-        // Show Success State after submission attempt
         if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.innerHTML = 'Submit Registration <span class="arrow">→</span>';
@@ -883,7 +1078,6 @@ function initJoinModal() {
   }
 }
 
-// ─── AXE CURSOR 90-DEGREE ROTATION ON CLICK ───
 function initAxeCursorRotation() {
   if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
 
@@ -920,7 +1114,6 @@ function initAxeCursorRotation() {
   });
 }
 
-// ─── 3D SATURN-RING ORBIT CTA ───
 function initCta3dOrbit() {
   const stage = document.getElementById('cta3dOrbitStage');
   if (!stage) return;
@@ -929,33 +1122,26 @@ function initCta3dOrbit() {
   if (!tags.length) return;
 
   const total = tags.length;
-  let angleOffset = 0;
 
-  function animateOrbit() {
-    angleOffset += 0.0055;
-
+  function positionCtaTagsStatic() {
     const isMobile = window.innerWidth < 600;
     const Rx = isMobile ? 210 : 480;
     const Ry = isMobile ? 90 : 175;
 
     tags.forEach((tag, idx) => {
-      const angle = angleOffset + (idx / total) * Math.PI * 2;
+      const angle = (idx / total) * Math.PI * 2;
       const x = Math.cos(angle) * Rx;
       const y = Math.sin(angle) * Ry;
-      const z = Math.sin(angle);
 
-      const scale = 0.72 + (z + 1) * 0.24;
-      const opacity = 0.5 + (z + 1) * 0.25;
-      const zIndex = z > 0 ? 10 : 2;
-
-      tag.style.transform = `translate3d(calc(-50% + ${x}px), calc(-50% + ${y}px), 0) scale(${scale})`;
-      tag.style.opacity = opacity;
-      tag.style.zIndex = zIndex;
+      tag.style.position = 'absolute';
+      tag.style.top = '50%';
+      tag.style.left = '50%';
+      tag.style.transform = `translate3d(calc(-50% + ${x}px), calc(-50% + ${y}px), 0) scale(0.85)`;
+      tag.style.opacity = '0.9';
+      tag.style.zIndex = '5';
     });
-
-    requestAnimationFrame(animateOrbit);
   }
 
-  requestAnimationFrame(animateOrbit);
+  positionCtaTagsStatic();
+  window.addEventListener('resize', positionCtaTagsStatic);
 }
-

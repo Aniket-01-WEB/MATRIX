@@ -21,37 +21,28 @@
 
 <body>
 
-  <!-- ═══════════════════ NAVBAR ═══════════════════ -->
-  <nav id="navbar" class="navbar">
-    <div class="nav-container">
-      <a href="#" class="nav-brand" aria-label="MATRIX Home">
-        <img src="real_logo_org.png" alt="MATRIX Logo" class="nav-logo">
-        <div class="nav-brand-text">
-          <span class="nav-brand-name">MATRIX</span>
-          <span class="nav-brand-sub">FinTech Club</span>
-        </div>
+  <nav id="navbar" class="navbar habito-navbar">
+    <div class="nav-container habito-nav-container">
+      <a href="#" class="nav-brand habito-brand" aria-label="Fitech Home">
+        <span class="nav-brand-name habito-brand-name">Fitech</span>
       </a>
-      <ul class="nav-links" id="navLinks">
+      <ul class="nav-links habito-nav-links" id="navLinks">
         <li><a href="#hero">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#domains">Domains</a></li>
+        <li><a href="#domains">Domain</a></li>
         <li><a href="#events">Events</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#team">Team</a></li>
       </ul>
-      <button type="button" class="nav-cta trigger-join-modal" id="navJoinBtn">Join MATRIX <span class="arrow">→</span></button>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 
-  <!-- ═══════════════════ MOBILE MENU ═══════════════════ -->
   <div class="mobile-menu" id="mobileMenu">
     <ul class="mobile-links">
       <li><a href="#hero">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#domains">Domains</a></li>
+      <li><a href="#domains">Domain</a></li>
       <li><a href="#events">Events</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#team">Team</a></li>
@@ -59,100 +50,196 @@
     </ul>
   </div>
 
-  <!-- ═══════════════════ HERO ═══════════════════ -->
-  <section id="hero" class="hero">
-    <canvas id="heroCanvas" class="hero-canvas"></canvas>
-    <div class="hero-overlay"></div>
-    <!-- HERO TEXT CONTENT AT TOP -->
-    <div class="hero-content">
-      <h1 class="hero-title reveal-up">MONEY FOR HERE,<br>THERE AND EVERYWHERE</h1>
-      <p class="hero-subtitle reveal-up">One place to manage your money. Save when you send, receive<br>and spend worldwide.</p>
+  <section id="hero" class="habito-hero">
+    <div class="habito-container">
+      <div class="habito-hero-top">
+        <div class="habito-media-col reveal-up">
+          <div class="habito-showreel-box">
+            <div class="habito-showreel-graphic">
+              <div class="habito-cross-lines">
+                <span class="cross-line-h"></span>
+                <span class="cross-line-v"></span>
+              </div>
+              <div class="habito-dot"></div>
+            </div>
+          </div>
+          <span class="habito-showreel-caption">Global Money Platform</span>
+        </div>
+        <div class="habito-title-col reveal-up">
+          <h1 class="habito-main-title">
+            <span id="heroMoneyTicker" class="hero-money-ticker">MONEY</span> FOR<br>
+            HERE, THERE &<br>
+            EVERYWHERE
+          </h1>
+        </div>
+      </div>
+
+      <div class="habito-hero-bottom">
+        <div class="habito-statement-col reveal-up">
+          <p class="habito-statement-text">
+            One place to manage your money. Save when you send, receive and spend worldwide.
+          </p>
+        </div>
+        <div class="habito-actions-col reveal-up">
+          <a href="#" class="habito-action-link trigger-join-modal">Join us <span class="arrow">→</span></a>
+          <a href="#about" class="habito-action-link">About us <span class="arrow">→</span></a>
+        </div>
+      </div>
     </div>
 
-    <!-- 3D ORBIT STAGE WITH CENTER MATRIX CREST LOGO & 12 REVOLVING CIRCULAR BALL BADGES -->
-    <div class="hero-3d-orbit-stage reveal-up" id="hero3dOrbitStage">
-      <div class="hero-center-logo-box">
-        <img src="final_logo_nobg.png" alt="MATRIX Club Crest Emblem" class="hero-center-logo-img">
-      </div>
-      <div class="hero-orbit-items" id="heroOrbitItems">
-        <div class="hero-orbit-ball ball-black"><span><span class="highlight-letter">M</span>ARKETS</span></div>
-        <div class="hero-orbit-ball ball-white"><span><span class="highlight-letter">A</span>NALYTICS</span></div>
-        <div class="hero-orbit-ball ball-black"><span><span class="highlight-letter">T</span>ECHNOLOGY</span></div>
-        <div class="hero-orbit-ball ball-white"><span><span class="highlight-letter">R</span>ESEARCH</span></div>
-        <div class="hero-orbit-ball ball-black"><span><span class="highlight-letter">I</span>NNOVATION</span></div>
-        <div class="hero-orbit-ball ball-white"><span><span class="highlight-letter">X</span>CHANGE</span></div>
-        <div class="hero-orbit-ball ball-black"><span><span class="highlight-letter">C</span>APITAL</span></div>
-        <div class="hero-orbit-ball ball-white"><span><span class="highlight-letter">V</span>ENTURES</span></div>
+    <div class="habito-ticker-bar">
+      <div class="habito-ticker-track">
+        <div class="habito-ticker-content">
+          <span>FINANCIAL TECHNOLOGY</span><span class="dot">•</span>
+          <span>QUANTITATIVE TRADING</span><span class="dot">•</span>
+          <span>BLOCKCHAIN & DEFI</span><span class="dot">•</span>
+          <span>ALGORITHMIC MARKETS</span><span class="dot">•</span>
+          <span>ARTIFICIAL INTELLIGENCE</span><span class="dot">•</span>
+          <span>VENTURE CAPITAL</span><span class="dot">•</span>
+          <span>DATA ANALYTICS</span><span class="dot">•</span>
+          <span>DERIVATIVES & STOCKS</span><span class="dot">•</span>
+          <span>PORTFOLIO MANAGEMENT</span><span class="dot">•</span>
+          <span>NEOBANKING</span><span class="dot">•</span>
+        </div>
+        <div class="habito-ticker-content" aria-hidden="true">
+          <span>FINANCIAL TECHNOLOGY</span><span class="dot">•</span>
+          <span>QUANTITATIVE TRADING</span><span class="dot">•</span>
+          <span>BLOCKCHAIN & DEFI</span><span class="dot">•</span>
+          <span>ALGORITHMIC MARKETS</span><span class="dot">•</span>
+          <span>ARTIFICIAL INTELLIGENCE</span><span class="dot">•</span>
+          <span>VENTURE CAPITAL</span><span class="dot">•</span>
+          <span>DATA ANALYTICS</span><span class="dot">•</span>
+          <span>DERIVATIVES & STOCKS</span><span class="dot">•</span>
+          <span>PORTFOLIO MANAGEMENT</span><span class="dot">•</span>
+          <span>NEOBANKING</span><span class="dot">•</span>
+        </div>
       </div>
     </div>
   </section>
 
 
-  <!-- ═══════════════════ ABOUT ═══════════════════ -->
-  <section id="about" class="about-pinned-section">
-    <div class="about-sticky-wrapper">
-      <div class="container">
-        <div class="section-label reveal-up">01 — ABOUT MATRIX</div>
-        <div class="about-grid">
-          <div class="about-left reveal-up">
-            <h2 class="section-title">A community built for the future of finance.</h2>
-            <div class="github-activity-card">
-              <div class="github-months">
-                <span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span>
-              </div>
-              <div class="github-grid" id="githubGrid"></div>
-              <div class="github-footer">
-                <span>Less</span>
-                <div class="github-legend">
-                  <span class="sq level-0"></span>
-                  <span class="sq level-1"></span>
-                  <span class="sq level-2"></span>
-                  <span class="sq level-3"></span>
-                  <span class="sq level-4"></span>
-                </div>
-                <span>More</span>
-              </div>
-            </div>
+  <section id="about" class="habito-about-card-section">
+    <div class="habito-about-card-inner">
+      <div class="habito-about-marquee">
+        <div class="habito-about-marquee-track">
+          <div class="habito-about-marquee-content">
+            <span>MATRIX STUDIO</span>
+            <svg class="clover-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2C10.5 4.5 7.5 5 5 5C5 7.5 4.5 10.5 2 12C4.5 13.5 5 16.5 5 19C7.5 19 10.5 19.5 12 22C13.5 19.5 16.5 19 19 19C19 16.5 19.5 13.5 22 12C19.5 10.5 19 7.5 19 5C16.5 5 13.5 4.5 12 2Z" fill="#0f172a"/>
+            </svg>
+            <span>ABOUT US</span>
+            <svg class="clover-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2C10.5 4.5 7.5 5 5 5C5 7.5 4.5 10.5 2 12C4.5 13.5 5 16.5 5 19C7.5 19 10.5 19.5 12 22C13.5 19.5 16.5 19 19 19C19 16.5 19.5 13.5 22 12C19.5 10.5 19 7.5 19 5C16.5 5 13.5 4.5 12 2Z" fill="#0f172a"/>
+            </svg>
+            <span>FINANCIAL INNOVATION</span>
+            <svg class="clover-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2C10.5 4.5 7.5 5 5 5C5 7.5 4.5 10.5 2 12C4.5 13.5 5 16.5 5 19C7.5 19 10.5 19.5 12 22C13.5 19.5 16.5 19 19 19C19 16.5 19.5 13.5 22 12C19.5 10.5 19 7.5 19 5C16.5 5 13.5 4.5 12 2Z" fill="#0f172a"/>
+            </svg>
           </div>
-          <div class="about-right reveal-up">
-            <div class="scroll-text-container" id="aboutScrollContainer">
-              <p class="about-scroll-text">MATRIX brings together visionary students interested in global finance,
-                financial technology, quantitative investment, artificial intelligence, blockchain architecture, data
-                science, and modern entrepreneurship.</p>
-              <p class="about-scroll-text">Our mission is to bridge the gap between academic theory and real-world
-                financial engineering. Through hands-on student projects, high-stakes hackathons, interactive trading
-                simulations, research publications, and direct mentorship from top industry leaders, MATRIX empowers the
-                next generation of financial innovators.</p>
-              <p class="about-scroll-text">Whether you are building algorithmic trading bots, exploring decentralized
-                finance protocols, or designing seamless global payment solutions, MATRIX provides the platform,
-                network, and resources to bring your ideas to life.</p>
+          <div class="habito-about-marquee-content" aria-hidden="true">
+            <span>MATRIX STUDIO</span>
+            <svg class="clover-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2C10.5 4.5 7.5 5 5 5C5 7.5 4.5 10.5 2 12C4.5 13.5 5 16.5 5 19C7.5 19 10.5 19.5 12 22C13.5 19.5 16.5 19 19 19C19 16.5 19.5 13.5 22 12C19.5 10.5 19 7.5 19 5C16.5 5 13.5 4.5 12 2Z" fill="#0f172a"/>
+            </svg>
+            <span>ABOUT US</span>
+            <svg class="clover-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2C10.5 4.5 7.5 5 5 5C5 7.5 4.5 10.5 2 12C4.5 13.5 5 16.5 5 19C7.5 19 10.5 19.5 12 22C13.5 19.5 16.5 19 19 19C19 16.5 19.5 13.5 22 12C19.5 10.5 19 7.5 19 5C16.5 5 13.5 4.5 12 2Z" fill="#0f172a"/>
+            </svg>
+            <span>FINANCIAL INNOVATION</span>
+            <svg class="clover-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2C10.5 4.5 7.5 5 5 5C5 7.5 4.5 10.5 2 12C4.5 13.5 5 16.5 5 19C7.5 19 10.5 19.5 12 22C13.5 19.5 16.5 19 19 19C19 16.5 19.5 13.5 22 12C19.5 10.5 19 7.5 19 5C16.5 5 13.5 4.5 12 2Z" fill="#0f172a"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="habito-container habito-about-grid-container">
+        <div class="habito-about-grid">
+          <div class="habito-about-left"></div>
+
+          <div class="habito-about-right reveal-up">
+            <div class="habito-about-block">
+              <h3 class="habito-about-subtitle">About Us</h3>
+              <p class="habito-about-desc">
+                At MATRIX Studio, we're not just a student club — we're your creative partners. We help brands & students grow with smart, quantitative, and purpose-driven design. From startups to scale-ups, our ecosystem gives you the flexibility to get top-tier branding and financial engineering without traditional fuss.
+              </p>
             </div>
-            <a href="#domains" class="text-link" style="margin-top:24px;">Our Mission <span class="arrow">→</span></a>
+
+            <div class="habito-about-block">
+              <h3 class="habito-about-subtitle">Our idealist</h3>
+              <p class="habito-about-desc">
+                We believe great design is not just about how it looks — it's about how it works. That's why we take the time to understand your vision, your goals, and your audience, delivering visual systems that are as strategic as they are stunning. <strong>Build for brands that move fast, think big, and value thoughtful design.</strong>
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════════ DOMAINS ═══════════════════ -->
-  <section id="domains" class="domains-pinned-section">
-    <div class="domains-sticky-wrapper">
-      <div class="container">
-        <div class="domains-grid-layout">
-          <div class="domains-left reveal-up">
-            <div class="section-label">02 — DOMAINS</div>
-            <h2 class="section-title domains-title-50">Six dimensions of innovation.</h2>
-            <div class="domains-nav-controls">
-              <button type="button" class="domains-nav-btn prev-btn" id="domainsPrevBtn" aria-label="Previous Domain Card">←</button>
-              <button type="button" class="domains-nav-btn next-btn" id="domainsNextBtn" aria-label="Next Domain Card">→</button>
-              <span class="domains-counter-indicator" id="domainsCounter">01 / 06</span>
+  <section id="domains" class="domains-squeeze-section">
+    <div class="domains-squeeze-sticky">
+      <div class="domains-squeeze-text" id="domainsSqueezeText">
+        <h2 class="domains-squeeze-title">
+          <span class="squeeze-line">SIX</span>
+          <span class="squeeze-line">DIMENSIONS</span>
+          <span class="squeeze-line">OF INNOVATION</span>
+        </h2>
+      </div>
+    </div>
+  </section>
+
+  <section id="domains-cards" class="domains-habito-grid-section">
+    <div class="domains-habito-container">
+      <div class="habito-col col-small">
+        <div class="habito-card habito-card-dark">
+          <div class="habito-card-inner">
+            <div class="habito-card-badge">01</div>
+            <div class="habito-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+            </div>
+            <h3 class="habito-card-heading">FinTech Architecture</h3>
+            <p class="habito-card-text">Engineering next-gen digital payment rails, core banking infrastructure, and cross-border API protocols.</p>
+            <div class="habito-card-tags">
+              <span>Payment Rails</span>
+              <span>Open Banking</span>
+              <span>APIs</span>
             </div>
           </div>
-          <div class="domains-right reveal-up">
-            <div class="domains-stack-wrapper">
-              <div class="domains-stack-container" id="domainsStack">
-                <!-- Populated by JS -->
-              </div>
+        </div>
+      </div>
+
+      <div class="habito-col col-small">
+        <div class="habito-card habito-card-light">
+          <div class="habito-card-inner">
+            <div class="habito-card-badge">02</div>
+            <div class="habito-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+            </div>
+            <h3 class="habito-card-heading">Markets & Quantitative Investment</h3>
+            <p class="habito-card-text">Algorithmic trading strategies, portfolio optimization, stochastic modeling & risk analytics.</p>
+            <div class="habito-card-tags">
+              <span>Algo Trading</span>
+              <span>Portfolio Mgmt</span>
+              <span>Quant</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="habito-col col-wide">
+        <div class="habito-card habito-card-dark">
+          <div class="habito-card-inner">
+            <div class="habito-card-badge">03</div>
+            <div class="habito-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93"/><path d="M8.56 6A4 4 0 0 1 12 2"/><circle cx="12" cy="14" r="3"/><path d="M6 20a6 6 0 0 1 12 0"/></svg>
+            </div>
+            <h3 class="habito-card-heading">AI & Data Science in Finance</h3>
+            <p class="habito-card-text">Predictive ML models, NLP sentiment analysis, fraud detection & automated credit scoring algorithms.</p>
+            <div class="habito-card-tags">
+              <span>Machine Learning</span>
+              <span>NLP</span>
+              <span>Analytics</span>
             </div>
           </div>
         </div>
@@ -160,10 +247,66 @@
     </div>
   </section>
 
-  <!-- ═══════════════════ EVENTS ═══════════════════ -->
+  <section id="domains-cards-2" class="domains-habito-grid-section domains-habito-grid-section-alt">
+    <div class="domains-habito-container alt-layout">
+      <div class="habito-col col-wide">
+        <div class="habito-card habito-card-light">
+          <div class="habito-card-inner">
+            <div class="habito-card-badge">04</div>
+            <div class="habito-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="9" height="9" rx="1"/><rect x="14" y="1" width="9" height="9" rx="1"/><rect x="1" y="14" width="9" height="9" rx="1"/><rect x="14" y="14" width="9" height="9" rx="1"/></svg>
+            </div>
+            <h3 class="habito-card-heading">Blockchain & Decentralized Web3</h3>
+            <p class="habito-card-text">Exploring decentralized smart contracts, Zero-Knowledge proofs, tokenomics, automated market makers (AMMs), and digital assets.</p>
+            <div class="habito-card-tags">
+              <span>Smart Contracts</span>
+              <span>DeFi Protocols</span>
+              <span>ZK Proofs</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="habito-col col-small">
+        <div class="habito-card habito-card-dark">
+          <div class="habito-card-inner">
+            <div class="habito-card-badge">05</div>
+            <div class="habito-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            </div>
+            <h3 class="habito-card-heading">Venture & Entrepreneurship</h3>
+            <p class="habito-card-text">Incubating student fintech startups, pitching to institutional investors, building MVPs, and navigating financial regulatory compliance.</p>
+            <div class="habito-card-tags">
+              <span>Startup Accelerator</span>
+              <span>Venture Pitching</span>
+              <span>RegTech</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="habito-col col-small">
+        <div class="habito-card habito-card-light">
+          <div class="habito-card-inner">
+            <div class="habito-card-badge">06</div>
+            <div class="habito-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>
+            </div>
+            <h3 class="habito-card-heading">Quantitative Research & Innovation</h3>
+            <p class="habito-card-text">Publishing cutting-edge research whitepapers on macro-economics, central bank digital currencies (CBDCs), and high-frequency trading.</p>
+            <div class="habito-card-tags">
+              <span>Research Whitepapers</span>
+              <span>CBDC Analytics</span>
+              <span>HFT Systems</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="events" class="section events">
     <div class="container">
-      <div class="section-label reveal-up">03 — EVENTS</div>
       <h2 class="section-title reveal-up">Where ideas become experiences.</h2>
       <div class="events-tabs reveal-up">
         <button class="tab-btn active" data-tab="upcoming">Upcoming</button>
@@ -172,39 +315,31 @@
     </div>
     <div class="events-marquee-wrapper reveal-up">
       <div class="events-marquee-track" id="eventsGrid">
-        <!-- Populated by JS -->
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════════ PROJECTS ═══════════════════ -->
   <section id="projects" class="section projects-scatter-section">
     <div class="projects-grid-bg"></div>
     <div class="container">
-      <div class="section-label reveal-up">04 — PROJECTS</div>
       <h2 class="section-title reveal-up">Building the future, one idea at a time.</h2>
     </div>
     <div class="projects-scatter-viewport reveal-up">
       <div class="projects-scatter-container" id="projectsGrid">
-        <!-- Populated by JS -->
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════════ TEAM ═══════════════════ -->
   <section id="team" class="section team-section">
     <div class="container">
-      <div class="section-label reveal-up">05 — TEAM & MEMBERS</div>
       <h2 class="section-title reveal-up">The people behind MATRIX.</h2>
     </div>
     <div class="team-marquee-wrapper reveal-up">
       <div class="team-marquee-track" id="teamGrid">
-        <!-- Populated by JS -->
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════════ BENEFITS ═══════════════════ -->
   <section id="benefits" class="section benefits">
     <div class="benefits-bg-ticker" aria-hidden="true">
       <div class="benefits-ticker-track">
@@ -215,15 +350,12 @@
     <div class="container">
       <h2 class="section-title center reveal-up">More Than a Club.</h2>
       <div class="benefits-grid" id="benefitsGrid">
-        <!-- Populated by JS -->
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════════ FOOTER ═══════════════════ -->
   <footer class="site-footer">
     <div class="footer-container">
-      <!-- GIANT MANIFESTO TITLE -->
       <h2 class="footer-manifesto reveal-up">
         Finance
         <svg class="plus-icon-spin" width="68" height="68" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -234,7 +366,6 @@
         Technology
       </h2>
 
-      <!-- BRAND LOGO & DESCRIPTION ROW -->
       <div class="footer-brand-row reveal-up">
         <div class="footer-brand">
           <img src="real_logo_org.png" alt="MATRIX FinTech Logo" class="footer-logo-img">
@@ -247,7 +378,6 @@
         </p>
       </div>
 
-      <!-- NAVIGATION COLUMNS & SOCIAL STRIP -->
       <div class="footer-links-row reveal-up">
         <div class="footer-col">
           <span class="footer-col-title">Navigation</span>
@@ -280,7 +410,6 @@
           </ul>
         </div>
 
-        <!-- SOCIAL ICONS STRIP RIGHT ALIGNED -->
         <div class="footer-social-strip">
           <a href="#" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
               <path
@@ -305,7 +434,6 @@
         </div>
       </div>
 
-      <!-- SECURITY BADGE & COPYRIGHT STRIP -->
       <div class="footer-bottom-row reveal-up">
         <div class="footer-cert-badge">
           <div class="cert-icon-circle">MATRIX</div>
@@ -319,7 +447,8 @@
         </div>
       </div>
     </div>
-  <!-- ═══════════════════ JOIN MATRIX SPREADSHEET MODAL ═══════════════════ -->
+  </footer>
+
   <div class="join-modal-backdrop" id="joinModalBackdrop" aria-hidden="true">
     <div class="join-modal-container">
       <button class="join-modal-close" id="closeJoinModalBtn" aria-label="Close modal">&times;</button>
@@ -403,7 +532,6 @@
         </div>
       </form>
 
-      <!-- Success Screen State -->
       <div class="join-success-state" id="joinSuccessState" style="display: none;">
         <div class="success-icon-circle">✓</div>
         <h3>Welcome to MATRIX!</h3>
