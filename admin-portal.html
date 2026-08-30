@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Portal | MATRIX FinTech Club</title>
+  <meta name="description" content="Administrative event management portal for MATRIX FinTech Club.">
+
+  <!-- Google Fonts (Inherited from Design System) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Canonical and Extension Stylesheets -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="portal.css">
+
+  <!-- Immediate Head Session Validation Guard -->
+  <script src="portal-store.js"></script>
+  <script>
+    (function () {
+      try {
+        var raw = localStorage.getItem('matrix_current_user');
+        var user = raw ? JSON.parse(raw) : null;
+        if (!user || user.role !== 'admin') {
+          window.location.replace('login.html');
+        }
+      } catch (e) {
+        window.location.replace('login.html');
+      }
+    })();
+  </script>
+</head>
+<body class="portal-shell">
+
+  <!-- Canonical Consistent Navbar -->
+  <nav id="navbar" class="navbar habito-navbar">
+    <div class="nav-container habito-nav-container">
+      <a href="index.html" class="nav-brand habito-brand" aria-label="Fitech Home">
+        <span class="nav-brand-name habito-brand-name">Fitech</span>
+      </a>
+      <ul class="nav-links habito-nav-links" id="navLinks">
+        <li><a href="index.html#hero">Home</a></li>
+        <li><a href="index.html#domains">Domain</a></li>
+        <li><a href="index.html#events">Events</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="index.html#team">Team</a></li>
+        <li><a href="dashboard.html" class="nav-dashboard-link" id="navDashboardLink">Dashboard</a></li>
+        <li><button type="button" class="nav-signout-btn" id="navSignOutBtn" title="Sign Out">Sign Out →</button></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <ul class="mobile-links">
+      <li><a href="index.html#hero">Home</a></li>
+      <li><a href="index.html#domains">Domain</a></li>
+      <li><a href="index.html#events">Events</a></li>
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="index.html#team">Team</a></li>
+      <li><a href="dashboard.html" class="nav-dashboard-link" id="mobileNavDashboardLink">Dashboard</a></li>
+      <li><button type="button" class="nav-signout-btn" id="mobileSignOutBtn">Sign Out →</button></li>
+    </ul>
+  </div>
+
+  <!-- Main Admin Portal Section -->
+  <main class="portal-shell-body">
+    <div class="portal-container">
+
+      <!-- Header Bar with Action Button -->
+      <div class="portal-header-bar">
+        <div class="portal-title-block">
+          <h1 class="portal-main-heading" id="adminViewHeading">Event Management</h1>
+          <p class="portal-subtitle" id="adminViewSubtitle">Create, update, and manage club events, workshops, hackathons, and sessions.</p>
+        </div>
+
+        <!-- Create Event Action Button -->
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+          <button type="button" class="btn btn-primary" id="headerCreateEventBtn" style="padding: 10px 18px; font-size: 13.5px;">
+            + Create Event <span class="arrow">→</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Events Management List / Grid -->
+      <section id="adminEventsSection" aria-live="polite">
+        <div class="portal-events-grid" id="adminEventsContainer">
+          <!-- Dynamically populated via admin-portal.js -->
+        </div>
+
+        <!-- Empty Management State -->
+        <div class="portal-empty-state" id="adminEmptyState" style="display: none;">
+          <h2 class="portal-empty-title">No Club Events Published</h2>
+          <p class="portal-empty-desc">There are currently no events in the system. Click below to create and publish your first club experience.</p>
+          <button type="button" class="btn btn-primary" id="emptyCreateEventBtn">
+            + Create First Event <span class="arrow">→</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Divider between events and recordings -->
+      <hr class="portal-section-divider">
+
+      <!-- ======================================================================
+           SESSION RECORDINGS & MASTERCLASSES MANAGEMENT
+           ====================================================================== -->
+      <section class="portal-section" id="adminRecordingsSection" aria-labelledby="adminRecordingsHeading">
+        <div class="portal-section-header" style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 24px;">
+          <div class="portal-title-block">
+            <div class="join-modal-badge portal-badge-compact">ARCHIVE & MASTERCLASSES</div>
+            <h2 class="portal-section-heading" id="adminRecordingsHeading">Session Recordings & Masterclasses</h2>
+            <p class="portal-subtitle">Upload, update, and manage technical workshop and masterclass recordings for students.</p>
+          </div>
+          <button type="button" class="btn btn-primary" id="uploadSessionBtn" style="padding: 10px 18px; font-size: 13.5px;">
+            + Upload Session <span class="arrow">→</span>
+          </button>
+        </div>
+
+        <div class="portal-recordings-grid" id="adminRecordingsGrid">
+          <!-- Dynamically populated via admin-portal.js -->
+        </div>
+
+        <div class="portal-empty-state" id="adminRecordingsEmptyState" style="display: none;">
+          <h2 class="portal-empty-title">No Session Recordings Published</h2>
+          <p class="portal-empty-desc">There are currently no recorded masterclasses or workshop sessions in the portal.</p>
+          <button type="button" class="btn btn-primary" id="emptyUploadSessionBtn">
+            + Upload First Session <span class="arrow">→</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Divider between recordings and activity -->
+      <hr class="portal-section-divider">
+
+      <!-- ======================================================================
+           ADMIN ACTIVITY & TOTAL TIME SPENT (SAME AS STUDENTS)
+           ====================================================================== -->
+      <section class="portal-section" id="adminActivitySection" aria-labelledby="adminActivityHeading">
+        <div class="portal-section-header">
+          <div class="portal-title-block">
+            <div class="join-modal-badge portal-badge-compact">ADMINISTRATIVE ENGAGEMENT</div>
+            <h2 class="portal-section-heading" id="adminActivityHeading">Admin Activity & Time Tracker</h2>
+            <p class="portal-subtitle">Track your accumulated administrative management time, session updates, and portal activity.</p>
+          </div>
+        </div>
+
+        <!-- MATRIX Learning Activity Neo-Brutalist Visual -->
+        <div class="portal-activity-board">
+          <!-- Primary Total Time Spent Card -->
+          <div class="activity-hero-card">
+            <div class="activity-hero-header">
+              <span class="activity-live-indicator"><span class="activity-live-pulse"></span> ACTIVE SESSION</span>
+              <span class="activity-hero-tag">ACCUMULATED TIME</span>
+            </div>
+            <div class="activity-hero-main">
+              <div class="activity-hero-val" id="adminTotalTime">00h 00m</div>
+              <div class="activity-hero-lbl">TOTAL TIME SPENT</div>
+            </div>
+            <p class="activity-hero-footnote">Real-time tracked engagement across MATRIX FinTech Club portal administration & events management.</p>
+          </div>
+
+          <!-- Secondary Metric Breakdown Grid -->
+          <div class="activity-breakdown-row">
+            <div class="activity-subcard">
+              <div class="activity-subcard-header">
+                <span class="activity-subcard-icon">⚡</span>
+                <span class="activity-subcard-lbl">Portal & Event Management</span>
+              </div>
+              <div class="activity-subcard-val" id="adminWebsiteTime">00h 00m</div>
+              <p class="activity-subcard-desc">Active administration of upcoming events, agendas & member directory.</p>
+            </div>
+
+            <div class="activity-subcard">
+              <div class="activity-subcard-header">
+                <span class="activity-subcard-icon">▶</span>
+                <span class="activity-subcard-lbl">Recordings / Media Reviewed</span>
+              </div>
+              <div class="activity-subcard-val" id="adminRecordingTime">00h 00m</div>
+              <p class="activity-subcard-desc" id="adminSessionsCount">0 masterclass sessions reviewed.</p>
+            </div>
+
+            <div class="activity-subcard">
+              <div class="activity-subcard-header">
+                <span class="activity-subcard-icon">◈</span>
+                <span class="activity-subcard-lbl">Events Published</span>
+              </div>
+              <div class="activity-subcard-val" id="adminEventsPublishedCount">0</div>
+              <p class="activity-subcard-desc">Live workshops & hackathons managed.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+
+  <!-- Single Unified Shared Event Form Dialog (Create & Edit) -->
+  <div class="join-modal-backdrop" id="eventFormModal" aria-hidden="true">
+    <div class="join-modal-container" style="max-width: 680px;">
+      <button type="button" class="join-modal-close" id="closeFormModalBtn" aria-label="Close form modal">&times;</button>
+      <div class="join-modal-header">
+        <div class="join-modal-badge" id="modalFormBadge">EVENT CONFIGURATION</div>
+        <h2 class="join-modal-title" id="modalFormTitle">Create New Event</h2>
+        <p class="join-modal-subtitle" id="modalFormSubtitle">Enter event schedule, category, and venue details for publication.</p>
+      </div>
+
+      <form id="adminEventForm" class="join-modal-form" novalidate>
+        <!-- Hidden input for Edit mode tracking -->
+        <input type="hidden" id="editingEventId" value="">
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="eventTitle">EVENT TITLE <span class="req">*</span></label>
+            <input type="text" id="eventTitle" name="title" placeholder="e.g. Quantitative Trading Masterclass" required>
+          </div>
+
+          <div class="form-group">
+            <label for="eventType">EVENT TYPE <span class="req">*</span></label>
+            <input type="text" id="eventType" name="type" placeholder="e.g. Workshop, Summit, Hackathon" list="eventTypeList" required>
+            <datalist id="eventTypeList">
+              <option value="Event">
+              <option value="Workshop">
+              <option value="Session">
+              <option value="Summit">
+              <option value="Hackathon">
+              <option value="Lab">
+              <option value="Symposium">
+            </datalist>
+          </div>
+
+          <div class="form-group">
+            <label for="eventTime">DATE & SCHEDULE <span class="req">*</span></label>
+            <input type="text" id="eventTime" name="time" placeholder="e.g. Mar 15, 2026 • 10:00 AM" required>
+          </div>
+
+          <div class="form-group">
+            <label for="eventVenue">VENUE / LOCATION <span class="req">*</span></label>
+            <input type="text" id="eventVenue" name="venue" placeholder="e.g. Main Auditorium, Lab 301" required>
+          </div>
+
+          <div class="form-group form-group-full">
+            <label for="eventBanner">BANNER THEME / STYLE <span class="req">*</span></label>
+            <select id="eventBanner" name="banner" required>
+              <option value="linear-gradient(135deg, #0f172a, #1e293b)">Navy Deep Theme (Default)</option>
+              <option value="linear-gradient(135deg, #1e293b, #334155)">Slate Theme</option>
+              <option value="linear-gradient(135deg, #334155, #475569)">Steel Tech Theme</option>
+              <option value="linear-gradient(135deg, #0f172a, #334155)">Midnight Blue Theme</option>
+              <option value="linear-gradient(135deg, #1e293b, #475569)">Dark Charcoal Theme</option>
+            </select>
+          </div>
+
+          <div class="form-group form-group-full">
+            <label for="eventDescription">EVENT DESCRIPTION <span class="req">*</span></label>
+            <textarea id="eventDescription" name="description" placeholder="Provide full description of objectives, topics, and prerequisites..." required></textarea>
+          </div>
+        </div>
+
+        <div class="portal-field-error" id="adminFormError" style="margin-top: 12px;" aria-live="polite"></div>
+
+        <div class="form-actions" style="margin-top: 24px;">
+          <button type="submit" class="join-submit-btn" id="eventSubmitBtn">
+            PUBLISH EVENT <span class="arrow">→</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Overlaid Admin Event Detail Presentation & Registered Students Modal -->
+  <div class="portal-detail-backdrop" id="adminEventDetailModal" aria-hidden="true">
+    <div class="portal-detail-dialog" style="max-width: 720px;">
+      <button type="button" class="join-modal-close" id="closeAdminDetailModalBtn" aria-label="Close detail modal">&times;</button>
+      
+      <div class="portal-detail-banner" id="adminDetailBanner">
+        <span class="event-category" id="adminDetailTypeBadge">WORKSHOP</span>
+      </div>
+      
+      <div class="portal-detail-body">
+        <h2 class="portal-detail-title" id="adminDetailTitle">Event Title</h2>
+        <div class="portal-detail-meta">
+          <span id="adminDetailTime">📅 Time</span>
+          <span id="adminDetailVenue">📍 Venue</span>
+        </div>
+        <p class="portal-detail-desc" id="adminDetailDescription">Full event description text goes here.</p>
+        
+        <!-- Action Toolbar -->
+        <div class="portal-card-actions" style="border-top: 1px solid var(--border); padding-top: 20px;">
+          <button type="button" class="btn btn-secondary" id="adminDetailEditBtn">
+            Edit Event →
+          </button>
+          <button type="button" class="btn btn-primary" id="adminDetailStudentsBtn">
+            View Registered Students (<span id="registeredStudentsCount">0</span>)
+          </button>
+        </div>
+
+        <!-- Registered Students Panel Container -->
+        <div class="portal-registered-students-panel" id="registeredStudentsPanel" style="margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--gray-4); display: none;">
+          <h3 class="portal-section-subtitle" style="font-family: var(--font-heading); font-size: 15px; font-weight: 700; color: #0f172a; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between;">
+            <span>REGISTERED CLUB MEMBERS</span>
+            <span class="tag-pill" id="registeredCountBadge" style="background: #f8fafc; border: 1px solid #cbd5e1; color: #334155; font-size: 12px;">0 Students</span>
+          </h3>
+
+          <!-- Registered Students List -->
+          <div class="portal-students-list" id="registeredStudentsList">
+            <!-- Dynamically rendered student profile cards -->
+          </div>
+
+          <!-- Empty Registered Students State -->
+          <div class="portal-empty-state" id="registeredStudentsEmptyState" style="display: none; padding: 28px 16px;">
+            <p class="portal-empty-desc" style="margin: 0; font-size: 14px;">No students have registered for this event yet.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Shared Edit Member Details Dialog Modal -->
+  <div class="join-modal-backdrop" id="memberFormModal" aria-hidden="true">
+    <div class="join-modal-container" style="max-width: 680px;">
+      <button type="button" class="join-modal-close" id="closeMemberModalBtn" aria-label="Close member form modal">&times;</button>
+      <div class="join-modal-header">
+        <div class="join-modal-badge">MEMBER PROFILE CONFIGURATION</div>
+        <h2 class="join-modal-title">Edit Member Details</h2>
+        <p class="join-modal-subtitle">Modify academic and profile details for this registered club member.</p>
+      </div>
+
+      <form id="adminMemberForm" class="join-modal-form" novalidate>
+        <input type="hidden" id="editingMemberEmail" value="">
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="editMemberName">FULL NAME <span class="req">*</span></label>
+            <input type="text" id="editMemberName" name="name" placeholder="Full Name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="editMemberGmail">GMAIL / EMAIL ADDRESS <span class="req">*</span></label>
+            <input type="email" id="editMemberGmail" name="gmail" placeholder="student@matrix.club" required readonly style="background: #e2e8f0; cursor: not-allowed;">
+          </div>
+
+          <div class="form-group">
+            <label for="editMemberRegNumber">REGISTRATION NUMBER <span class="req">*</span></label>
+            <input type="text" id="editMemberRegNumber" name="regNumber" placeholder="Registration Number" required>
+          </div>
+
+          <div class="form-group">
+            <label for="editMemberRollNumber">ROLL NUMBER <span class="req">*</span></label>
+            <input type="text" id="editMemberRollNumber" name="rollNumber" placeholder="Roll Number" required>
+          </div>
+
+          <div class="form-group">
+            <label for="editMemberSchool">SCHOOL <span class="req">*</span></label>
+            <input type="text" id="editMemberSchool" name="school" placeholder="School" required>
+          </div>
+
+          <div class="form-group">
+            <label for="editMemberDept">DEPARTMENT <span class="req">*</span></label>
+            <input type="text" id="editMemberDept" name="department" placeholder="Department" required>
+          </div>
+
+          <div class="form-group">
+            <label for="editMemberSection">SECTION <span class="req">*</span></label>
+            <input type="text" id="editMemberSection" name="section" placeholder="Section" required>
+          </div>
+
+          <div class="form-group">
+            <label for="editMemberCurrentYear">CURRENT YEAR <span class="req">*</span></label>
+            <select id="editMemberCurrentYear" name="currentYear" required>
+              <option value="1st Year">1st Year</option>
+              <option value="2nd Year">2nd Year</option>
+              <option value="3rd Year">3rd Year</option>
+              <option value="4th Year">4th Year</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="editMemberContact">CONTACT NUMBER <span class="req">*</span></label>
+            <input type="tel" id="editMemberContact" name="contactNumber" placeholder="Contact Number" required>
+          </div>
+
+          <div class="form-group">
+            <label for="editMemberInterestedDomain">INTERESTED DOMAIN <span class="req">*</span></label>
+            <select id="editMemberInterestedDomain" name="interestedDomain" required>
+              <option value="Quantitative Finance & Algo">Quantitative Finance & Algo</option>
+              <option value="AI & Machine Learning">AI & Machine Learning</option>
+              <option value="Blockchain & Crypto Web3">Blockchain & Crypto Web3</option>
+              <option value="Full-Stack Software Engineering">Full-Stack Software Engineering</option>
+              <option value="Trading & Financial Markets">Trading & Financial Markets</option>
+              <option value="Data Analytics & Research">Data Analytics & Research</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="portal-field-error" id="adminMemberFormError" style="margin-top: 12px;" aria-live="polite"></div>
+
+        <div class="form-actions" style="margin-top: 24px;">
+          <button type="submit" class="join-submit-btn" id="memberSubmitBtn">
+            SAVE MEMBER DETAILS <span class="arrow">→</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Upload / Edit Session Modal Dialog -->
+  <div class="join-modal-backdrop" id="sessionFormModal" aria-hidden="true">
+    <div class="join-modal-container" style="max-width: 680px;">
+      <button type="button" class="join-modal-close" id="closeSessionModalBtn" aria-label="Close modal">&times;</button>
+      <div class="join-modal-header">
+        <div class="join-modal-badge" id="sessionModalBadge">SESSION MANAGEMENT</div>
+        <h2 class="join-modal-title" id="sessionModalTitle">Upload Session Recording</h2>
+        <p class="join-modal-subtitle" id="sessionModalSubtitle">Add or edit workshop masterclasses and technical deep-dives for students.</p>
+      </div>
+
+      <form id="adminSessionForm" class="join-modal-form">
+        <input type="hidden" id="editingSessionId" value="">
+
+        <div class="form-grid">
+          <div class="form-group" style="grid-column: 1 / -1;">
+            <label for="sessionTitle">SESSION TITLE <span class="req">*</span></label>
+            <input type="text" id="sessionTitle" name="title" placeholder="e.g. Algorithmic Market Making & Order Book Dynamics" required>
+          </div>
+
+          <div class="form-group">
+            <label for="sessionType">CATEGORY / TRACK <span class="req">*</span></label>
+            <select id="sessionType" name="type" required>
+              <option value="Quantitative Finance">Quantitative Finance</option>
+              <option value="AI & Machine Learning">AI & Machine Learning</option>
+              <option value="Blockchain & Crypto Web3">Blockchain & Crypto Web3</option>
+              <option value="Market Microstructure">Market Microstructure</option>
+              <option value="Trading Systems">Trading Systems</option>
+              <option value="Venture & FinTech">Venture & FinTech</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="sessionDuration">DURATION (e.g. 48m) <span class="req">*</span></label>
+            <input type="text" id="sessionDuration" name="duration" placeholder="48m" required>
+          </div>
+
+          <div class="form-group">
+            <label for="sessionDate">RECORDING DATE <span class="req">*</span></label>
+            <input type="text" id="sessionDate" name="date" placeholder="e.g. Feb 28, 2026" required>
+          </div>
+
+          <div class="form-group">
+            <label for="sessionSpeaker">SPEAKER / INSTRUCTOR <span class="req">*</span></label>
+            <input type="text" id="sessionSpeaker" name="speaker" placeholder="e.g. Arjun Nambiar • Senior Quantitative Strategist" required>
+          </div>
+
+          <div class="form-group" style="grid-column: 1 / -1;">
+            <label for="sessionVideoUrl">VIDEO / STREAM URL (OPTIONAL)</label>
+            <input type="text" id="sessionVideoUrl" name="videoUrl" placeholder="https://youtube.com/watch?v=... or internal player stream">
+          </div>
+
+          <div class="form-group" style="grid-column: 1 / -1;">
+            <label for="sessionDescription">BRIEF OVERVIEW / SYNOPSIS <span class="req">*</span></label>
+            <textarea id="sessionDescription" name="description" rows="3" placeholder="Summary of topics explored in this masterclass..." required style="width:100%; border:1px solid #cbd5e1; padding:10px; font-family:inherit; font-size:13.5px;"></textarea>
+          </div>
+
+          <div class="form-group" style="grid-column: 1 / -1;">
+            <label for="sessionTakeaways">KEY TAKEAWAYS (1 PER LINE)</label>
+            <textarea id="sessionTakeaways" name="takeaways" rows="3" placeholder="Stochastic calculus fundamentals&#10;Order book simulator construction&#10;Hedging against microstructure drift" style="width:100%; border:1px solid #cbd5e1; padding:10px; font-family:inherit; font-size:13.5px;"></textarea>
+          </div>
+        </div>
+
+        <div class="portal-field-error" id="sessionFormError" style="margin-top: 12px;" aria-live="polite"></div>
+
+        <div class="form-actions" style="margin-top: 24px;">
+          <button type="submit" class="join-submit-btn" id="sessionSubmitBtn">
+            SAVE & PUBLISH SESSION <span class="arrow">→</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Reused Recording Player Modal for Admin Preview -->
+  <div class="portal-detail-backdrop" id="recordingModal" aria-hidden="true">
+    <div class="portal-detail-dialog portal-recording-dialog">
+      <button type="button" class="join-modal-close" id="closeRecordingModalBtn" aria-label="Close recording modal">&times;</button>
+      
+      <!-- Video Prototype Player Surface -->
+      <div class="portal-video-player" id="videoPlayerSurface">
+        <div class="player-screen-overlay">
+          <div class="player-hud-top">
+            <span class="player-status-badge"><span class="activity-live-pulse"></span> PREVIEW STREAM</span>
+            <span class="player-resolution-tag">1080P • 60 FPS</span>
+          </div>
+          
+          <div class="player-center-action">
+            <button type="button" class="player-play-btn" id="playerPlayBtn" aria-label="Toggle playback">
+              <span id="playerPlayIcon">▶</span>
+            </button>
+            <span class="player-state-label" id="playerStateLabel">Click to Preview Session</span>
+          </div>
+
+          <div class="player-hud-bottom">
+            <div class="player-progress-bar-wrap" id="playerProgressWrap">
+              <div class="player-progress-fill" id="playerProgressFill" style="width: 0%;"></div>
+            </div>
+            <div class="player-controls-row">
+              <div class="player-time-display">
+                <span id="playerCurrentTime">00:00</span> / <span id="playerTotalDuration">54:00</span>
+              </div>
+              <div class="player-session-badge" id="playerCategoryBadge">ALGO WORKSHOP</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recording Meta & Notes -->
+      <div class="portal-detail-body">
+        <div class="portal-recording-header-meta">
+          <span class="event-category" id="recordingTypeBadge">ALGO WORKSHOP</span>
+          <span class="recording-meta-item" id="recordingDate">📅 Feb 10, 2026</span>
+          <span class="recording-meta-item" id="recordingDuration">⏱ 54m</span>
+        </div>
+        
+        <h2 class="portal-detail-title" id="recordingTitle" style="margin-top: 14px;">Recording Title</h2>
+        <div class="portal-recording-speaker" id="recordingSpeaker">🎙 Dr. Vikram Sethi • Quant Research Lead</div>
+        <p class="portal-detail-desc" id="recordingDescription" style="margin-top: 12px;">Full session description text goes here.</p>
+
+        <!-- Key Takeaways List -->
+        <div class="portal-takeaways-block">
+          <h4 class="portal-takeaways-heading">SESSION TAKEAWAYS & SYLLABUS</h4>
+          <ul class="portal-takeaways-list" id="recordingTakeawaysList">
+            <!-- Dynamically populated -->
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shared Store and Admin Portal Controller Script -->
+  <script src="portal-store.js"></script>
+  <script src="admin-portal.js"></script>
+</body>
+</html>
+
+

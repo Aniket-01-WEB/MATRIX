@@ -1,0 +1,1195 @@
+/* ==========================================================================
+   portal.css — MATRIX FinTech Club Portal Extension Stylesheet
+   ==========================================================================
+   This stylesheet contains ONLY portal-specific layout extensions.
+   All design tokens, fonts, colors, and button bases are inherited directly
+   from canonical styles.css.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Portal Shell & Layout Infrastructure
+   -------------------------------------------------------------------------- */
+.portal-shell {
+  min-height: 100vh;
+  background: #ffffff;
+  color: #0a0a0a;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.portal-shell .navbar,
+.portal-login-section .navbar {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-bottom: 1px solid var(--border, rgba(0, 0, 0, 0.08)) !important;
+}
+
+.portal-shell-body {
+  padding-top: calc(var(--nav-h, 44px) + 36px);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.portal-container {
+  width: 100%;
+  max-width: var(--container, 1200px);
+  margin: 0 auto;
+  padding: clamp(32px, 5vw, 64px) clamp(20px, 4vw, 48px);
+  flex: 1;
+}
+
+.portal-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 40px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--gray-4, #cbd5e1);
+}
+
+.portal-title-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.portal-main-heading {
+  font-family: var(--font-heading, 'Space Grotesk', sans-serif);
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 800;
+  letter-spacing: -1.2px;
+  color: #0a0a0a;
+  margin: 0;
+}
+
+.portal-subtitle {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(14px, 1.2vw, 16px);
+  color: var(--gray-2, #64748b);
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   2. Portal User Badge & Header Extensions
+   -------------------------------------------------------------------------- */
+.nav-dashboard-link {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--gray-1, #334155);
+  text-decoration: none;
+  padding: 5px 12px;
+  border-radius: var(--radius, 0px);
+  transition: color var(--transition, 0.3s cubic-bezier(0.4, 0, 0.2, 1)), background var(--transition, 0.3s cubic-bezier(0.4, 0, 0.2, 1));
+}
+
+.nav-dashboard-link:hover {
+  color: #0a0a0a;
+  background: var(--bg-4, #f8fafc);
+}
+
+.nav-signout-btn {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: #0a0a0a;
+  background: transparent;
+  border: 1px solid #0a0a0a;
+  padding: 5px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  line-height: 1;
+  transition: all var(--transition, 0.3s cubic-bezier(0.4, 0, 0.2, 1));
+}
+
+.nav-signout-btn:hover {
+  background: #0a0a0a !important;
+  color: #ffffff !important;
+  border-color: #0a0a0a !important;
+}
+
+.mobile-links .nav-signout-btn {
+  font-family: var(--font-heading, 'Space Grotesk', sans-serif);
+  font-size: 16px;
+  font-weight: 700;
+  color: #0a0a0a;
+  background: transparent;
+  border: 1.5px solid #0a0a0a;
+  padding: 12px 20px;
+  border-radius: 0px;
+  width: 100%;
+  justify-content: center;
+  margin-top: 12px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.mobile-links .nav-signout-btn:hover {
+  background: #0a0a0a !important;
+  color: #ffffff !important;
+}
+
+.portal-user-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px;
+  background: #f8fafc;
+  border: 1px solid var(--gray-4, #cbd5e1);
+  border-radius: 100px;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 13px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.portal-user-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #0f172a;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading, 'Space Grotesk', sans-serif);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* --------------------------------------------------------------------------
+   3. Portal Event Cards Grid & Detail Viewer Extensions
+   -------------------------------------------------------------------------- */
+.portal-events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.portal-card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border, rgba(0, 0, 0, 0.08));
+}
+
+.portal-btn-joined {
+  background: #f1f5f9 !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* Detailed Event Viewer Modal/Overlay Extension */
+.portal-detail-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.portal-detail-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#memberFormModal {
+  z-index: 10050 !important;
+}
+
+#memberFormModal .join-modal-container {
+  z-index: 10051 !important;
+}
+
+.portal-detail-dialog {
+  background: #ffffff;
+  border: 1px solid var(--gray-4, #cbd5e1);
+  box-shadow: 0 32px 80px rgba(15, 23, 42, 0.35);
+  width: 100%;
+  max-width: 640px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  transform: scale(0.92) translateY(20px);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.portal-detail-backdrop.active .portal-detail-dialog {
+  transform: scale(1) translateY(0);
+}
+
+.portal-detail-banner {
+  width: 100%;
+  height: 200px;
+  background: #0f172a;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
+}
+
+.portal-detail-body {
+  padding: 28px 32px 36px;
+}
+
+.portal-detail-title {
+  font-family: var(--font-heading, 'Space Grotesk', sans-serif);
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  color: #0f172a;
+  margin: 0 0 16px;
+}
+
+.portal-detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 20px;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 13.5px;
+  color: var(--gray-2, #64748b);
+}
+
+.portal-detail-desc {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: #334155;
+  margin-bottom: 28px;
+}
+
+/* --------------------------------------------------------------------------
+   4. Admin Event Management Table Extensions
+   -------------------------------------------------------------------------- */
+.portal-admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border: 1px solid var(--gray-4, #cbd5e1);
+  margin-top: 24px;
+}
+
+.portal-admin-table th {
+  background: #f8fafc;
+  color: #0f172a;
+  font-family: var(--font-heading, 'Space Grotesk', sans-serif);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 14px 18px;
+  text-align: left;
+  border-bottom: 1.5px solid var(--gray-4, #cbd5e1);
+}
+
+.portal-admin-table td {
+  padding: 16px 18px;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 14px;
+  color: #0a0a0a;
+  border-bottom: 1px solid var(--border, rgba(0, 0, 0, 0.08));
+  vertical-align: middle;
+}
+
+.portal-admin-table tr:last-child td {
+  border-bottom: none;
+}
+
+.portal-admin-table tr:hover td {
+  background: #f8fafc;
+}
+
+/* --------------------------------------------------------------------------
+   5. Portal Empty State Box
+   -------------------------------------------------------------------------- */
+.portal-empty-state {
+  text-align: center;
+  padding: clamp(48px, 8vw, 80px) 24px;
+  background: #f8fafc;
+  border: 1.5px dashed var(--gray-4, #cbd5e1);
+  margin-top: 32px;
+}
+
+.portal-empty-title {
+  font-family: var(--font-heading, 'Space Grotesk', sans-serif);
+  font-size: clamp(20px, 2.5vw, 28px);
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 10px;
+}
+
+.portal-empty-desc {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 14.5px;
+  color: var(--gray-2, #64748b);
+  max-width: 460px;
+  margin: 0 auto 24px;
+}
+
+/* --------------------------------------------------------------------------
+   6. Multiline Textarea Form Control Extension
+   -------------------------------------------------------------------------- */
+.form-group textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1.5px solid var(--gray-4, #cbd5e1);
+  background: #f8fafc;
+  color: #0f172a;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 14px;
+  line-height: 1.5;
+  min-height: 110px;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.form-group textarea:focus {
+  border-color: #0f172a;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.08);
+}
+
+.form-group-full {
+  grid-column: 1 / -1;
+}
+
+
+/* --------------------------------------------------------------------------
+   7. Responsive Adaptations & Mobile UX Polish
+   -------------------------------------------------------------------------- */
+.portal-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.portal-tabs-nav {
+  display: inline-flex;
+  gap: 4px;
+  background: var(--bg-4, #f8fafc);
+  padding: 4px;
+  border: 1px solid var(--gray-4, #cbd5e1);
+}
+
+.portal-card-banner {
+  width: 100%;
+  height: 140px;
+  background: #0f172a;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  padding: 14px;
+  box-sizing: border-box;
+}
+
+/* Tablet Adaptations (<= 768px) */
+@media (max-width: 768px) {
+  .portal-header-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .portal-events-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .portal-detail-dialog {
+    max-width: 95vw;
+    max-height: 85vh;
+  }
+
+  .portal-admin-table th:nth-child(4),
+  .portal-admin-table td:nth-child(4) {
+    display: none; /* Hide venue column on mobile table */
+  }
+}
+
+/* Small Mobile Adaptations (<= 600px / 390px) */
+@media (max-width: 600px) {
+  .portal-container {
+    padding: 24px 16px;
+  }
+
+  .portal-nav-actions {
+    gap: 8px;
+  }
+
+  .portal-user-badge {
+    padding: 4px 10px;
+    font-size: 12px;
+    max-width: 160px;
+  }
+
+  .portal-user-badge #userEmailDisplay,
+  .portal-user-badge #adminEmailDisplay {
+    max-width: 110px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+  }
+
+  .portal-tabs-nav {
+    width: 100%;
+    display: flex;
+  }
+
+  .portal-tabs-nav .tab-btn {
+    flex: 1;
+    text-align: center;
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  .portal-detail-backdrop,
+  .join-modal-backdrop {
+    padding: 12px;
+  }
+
+  .portal-detail-dialog,
+  .join-modal-container {
+    padding: 20px 16px;
+  }
+
+  .portal-detail-body {
+    padding: 20px 16px 24px;
+  }
+
+  .portal-card-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .portal-card-actions .btn,
+  .portal-card-actions .text-link {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+
+
+/* --------------------------------------------------------------------------
+   8. Login Page Layout & Mode-Switching Transitions
+   -------------------------------------------------------------------------- */
+.portal-login-section {
+  min-height: calc(100vh - var(--nav-h, 44px));
+  margin-top: var(--nav-h, 44px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(32px, 6vw, 64px) clamp(20px, 4vw, 32px);
+  flex: 1;
+}
+
+.portal-login-container {
+  width: 100%;
+  max-width: 480px;
+  position: relative;
+}
+
+.portal-login-card {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid var(--gray-4, #cbd5e1);
+  box-shadow: 0 32px 80px rgba(15, 23, 42, 0.35);
+  padding: clamp(28px, 4vw, 40px);
+  position: relative;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.portal-login-card .join-modal-header {
+  text-align: left;
+}
+
+.portal-login-card .join-modal-title {
+  text-transform: uppercase;
+  text-align: left;
+}
+
+
+
+.portal-login-card.card-exit {
+  opacity: 0;
+  transform: translateY(-12px);
+  pointer-events: none;
+}
+
+.portal-login-card.card-enter {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.portal-login-card.card-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.portal-login-footer {
+  text-align: center;
+  margin-top: 24px;
+}
+
+.portal-prompt-text {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 13.5px;
+  color: var(--gray-2, #64748b);
+  margin: 0;
+}
+
+.portal-mode-switch-wrapper {
+  text-align: center;
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border, rgba(0, 0, 0, 0.08));
+}
+
+.portal-switch-btn {
+  font-family: var(--font-alt, 'Manrope', sans-serif);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #0f172a;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap var(--transition, 0.3s cubic-bezier(0.4, 0, 0.2, 1)), color var(--transition, 0.3s cubic-bezier(0.4, 0, 0.2, 1));
+}
+
+.portal-switch-btn:hover {
+  gap: 10px;
+  color: var(--gray-1, #334155);
+}
+
+.portal-field-error {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 12px;
+  font-weight: 500;
+  color: #ef4444;
+  margin-top: 4px;
+  min-height: 16px;
+  transition: opacity 0.2s ease;
+}
+
+.portal-input-error {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12) !important;
+}
+
+/* --------------------------------------------------------------------------
+   9. Admin Registered Students Component Styles
+   -------------------------------------------------------------------------- */
+.portal-student-card {
+  background: #ffffff;
+  border: 1px solid var(--gray-4, #cbd5e1);
+  padding: 16px 20px;
+  margin-bottom: 14px;
+  border-radius: 0px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.portal-student-card:last-child {
+  margin-bottom: 0;
+}
+
+.portal-student-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed var(--gray-4, #cbd5e1);
+}
+
+.portal-student-identity {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.portal-student-name {
+  font-family: var(--font-heading, 'Space Grotesk', sans-serif);
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.portal-student-email {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 13px;
+  color: var(--gray-2, #64748b);
+}
+
+.portal-student-details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px 16px;
+}
+
+@media (max-width: 600px) {
+  .portal-student-details-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+
+.portal-student-field {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.portal-student-field .field-label {
+  font-family: var(--font-alt, 'Manrope', sans-serif);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--gray-2, #64748b);
+}
+
+.portal-student-field .field-val {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #0f172a;
+}
+
+/* --------------------------------------------------------------------------
+   10. Phase 6H — Student Learning & Activity Extensions
+   -------------------------------------------------------------------------- */
+
+.portal-section-divider {
+  border: 0;
+  height: 1px;
+  background: var(--gray-4, #cbd5e1);
+  margin: clamp(48px, 6vw, 72px) 0;
+}
+
+.portal-section {
+  margin-top: 10px;
+}
+
+.portal-section-header {
+  margin-bottom: 28px;
+}
+
+.portal-badge-compact {
+  width: fit-content;
+  margin-bottom: 10px;
+  padding: 4px 10px;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+}
+
+.portal-section-heading {
+  font-family: var(--font-heading, 'Space Grotesk', sans-serif);
+  font-size: clamp(24px, 3.2vw, 36px);
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  color: #0a0a0a;
+  margin: 0 0 6px 0;
+}
+
+/* Recordings Grid */
+.portal-recordings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.recording-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border, rgba(0, 0, 0, 0.08));
+  border-radius: var(--radius, 0px);
+  background: #ffffff;
+  transition: transform var(--transition, 0.3s cubic-bezier(0.4, 0, 0.2, 1)), box-shadow var(--transition, 0.3s cubic-bezier(0.4, 0, 0.2, 1)), border-color var(--transition, 0.3s cubic-bezier(0.4, 0, 0.2, 1));
+  overflow: hidden;
+}
+
+.recording-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
+  border-color: var(--border-hover, rgba(0, 0, 0, 0.18));
+}
+
+.recording-banner {
+  height: 160px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px;
+  background: linear-gradient(135deg, #090d16, #1e293b);
+  overflow: hidden;
+}
+
+.recording-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.recording-banner-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+}
+
+.recording-duration-badge {
+  font-family: var(--font-alt, 'Manrope', sans-serif);
+  font-size: 11px;
+  font-weight: 700;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  padding: 4px 8px;
+  border-radius: 2px;
+  letter-spacing: 0.5px;
+}
+
+.recording-play-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 14px;
+  transition: background 0.2s ease, transform 0.2s ease;
+  z-index: 1;
+}
+
+.recording-card:hover .recording-play-indicator {
+  background: #ffffff;
+  color: #0f172a;
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.recording-speaker-tag {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gray-2, #64748b);
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+/* Recording Dialog & Player */
+.portal-recording-dialog {
+  max-width: 720px;
+  padding: 0;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.portal-video-player {
+  background: #000000;
+  position: relative;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.player-screen-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.8) 100%);
+}
+
+.player-hud-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.player-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-alt, 'Manrope', sans-serif);
+  font-size: 11px;
+  font-weight: 700;
+  color: #38bdf8;
+  letter-spacing: 0.8px;
+}
+
+.player-resolution-tag {
+  font-family: var(--font-alt, 'Manrope', sans-serif);
+  font-size: 10px;
+  font-weight: 700;
+  color: #94a3b8;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2px 6px;
+  border-radius: 2px;
+}
+
+.player-center-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.player-play-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: none;
+  color: #0f172a;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.player-play-btn:hover {
+  transform: scale(1.08);
+  background: #f1f5f9;
+}
+
+.player-state-label {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 12px;
+  font-weight: 600;
+  color: #e2e8f0;
+  letter-spacing: 0.3px;
+}
+
+.player-hud-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.player-progress-bar-wrap {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.player-progress-fill {
+  height: 100%;
+  background: #ffffff;
+  transition: width 0.2s linear;
+}
+
+.player-controls-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.player-time-display {
+  font-family: var(--font-alt, 'Manrope', sans-serif);
+  font-size: 11px;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.player-session-badge {
+  font-family: var(--font-alt, 'Manrope', sans-serif);
+  font-size: 10px;
+  font-weight: 700;
+  color: #94a3b8;
+  letter-spacing: 0.5px;
+}
+
+.portal-recording-header-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.recording-meta-item {
+  font-family: var(--font-alt, 'Manrope', sans-serif);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gray-2, #64748b);
+}
+
+.portal-recording-speaker {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #0f172a;
+  margin-top: 4px;
+}
+
+.portal-recording-keynotes {
+  margin-top: 20px;
+  padding: 16px;
+  background: var(--bg-4, #f8fafc);
+  border: 1px solid var(--gray-4, #cbd5e1);
+}
+
+.recording-notes-title {
+  font-family: var(--font-heading, 'Space Grotesk', sans-serif);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #0f172a;
+  margin: 0 0 10px 0;
+}
+
+.recording-notes-list {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.recording-notes-list li {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 13px;
+  color: var(--gray-1, #334155);
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   11. Phase 6H — Student Activity Board (Neo-Brutalist Visual)
+   -------------------------------------------------------------------------- */
+.portal-activity-board {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.activity-hero-card {
+  background: #0a0a0a;
+  color: #ffffff;
+  padding: clamp(24px, 4vw, 40px);
+  border: 1px solid #1e293b;
+  border-radius: var(--radius, 0px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.activity-hero-card::after {
+  content: '';
+  position: absolute;
+  right: -60px;
+  bottom: -60px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.activity-hero-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.activity-live-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-alt, 'Manrope', sans-serif);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: #a7f3d0;
+}
+
+.activity-live-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: pulse-live 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+@keyframes pulse-live {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+.activity-hero-tag {
+  font-family: var(--font-alt, 'Manrope', sans-serif);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  color: #94a3b8;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 3px 8px;
+  border-radius: 2px;
+}
+
+.activity-hero-main {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.activity-hero-val {
+  font-family: var(--font-heading, 'Space Grotesk', sans-serif);
+  font-size: clamp(40px, 6vw, 76px);
+  font-weight: 800;
+  letter-spacing: -2px;
+  line-height: 1;
+  color: #ffffff;
+}
+
+.activity-hero-lbl {
+  font-family: var(--font-alt, 'Manrope', sans-serif);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+
+.activity-hero-footnote {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 13px;
+  color: #64748b;
+  margin: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 12px;
+}
+
+/* Secondary Breakdown Row */
+.activity-breakdown-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 860px) {
+  .activity-breakdown-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+.activity-subcard {
+  background: #ffffff;
+  border: 1px solid var(--gray-4, #cbd5e1);
+  padding: 22px 24px;
+  border-radius: var(--radius, 0px);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  transition: transform var(--transition, 0.3s cubic-bezier(0.4, 0, 0.2, 1)), border-color var(--transition, 0.3s cubic-bezier(0.4, 0, 0.2, 1));
+}
+
+.activity-subcard:hover {
+  transform: translateY(-2px);
+  border-color: var(--gray-1, #334155);
+}
+
+.activity-subcard-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.activity-subcard-icon {
+  font-size: 14px;
+}
+
+.activity-subcard-lbl {
+  font-family: var(--font-alt, 'Manrope', sans-serif);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gray-2, #64748b);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.activity-subcard-val {
+  font-family: var(--font-heading, 'Space Grotesk', sans-serif);
+  font-size: clamp(24px, 2.5vw, 32px);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: #0f172a;
+}
+
+.activity-subcard-desc {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 12.5px;
+  color: var(--gray-2, #64748b);
+  margin: 0;
+  line-height: 1.45;
+}
+
+

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Portal | MATRIX FinTech Club</title>
+  <meta name="description" content="Student Portal to discover upcoming club events, workshops, sessions, and track joined activities.">
+
+  <!-- Google Fonts (Inherited from Design System) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Canonical and Extension Stylesheets -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="portal.css">
+
+  <!-- Immediate Head Session Validation Guard -->
+  <script src="portal-store.js"></script>
+  <script>
+    (function () {
+      try {
+        var raw = localStorage.getItem('matrix_current_user');
+        var user = raw ? JSON.parse(raw) : null;
+        if (!user || user.role !== 'student') {
+          window.location.replace('login.html');
+        }
+      } catch (e) {
+        window.location.replace('login.html');
+      }
+    })();
+  </script>
+</head>
+<body class="portal-shell">
+
+  <!-- Canonical Consistent Navbar -->
+  <nav id="navbar" class="navbar habito-navbar">
+    <div class="nav-container habito-nav-container">
+      <a href="index.html" class="nav-brand habito-brand" aria-label="Fitech Home">
+        <span class="nav-brand-name habito-brand-name">Fitech</span>
+      </a>
+      <ul class="nav-links habito-nav-links" id="navLinks">
+        <li><a href="index.html#hero">Home</a></li>
+        <li><a href="index.html#domains">Domain</a></li>
+        <li><a href="index.html#events">Events</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="index.html#team">Team</a></li>
+        <li><a href="dashboard.html" class="nav-dashboard-link" id="navDashboardLink">Dashboard</a></li>
+        <li><button type="button" class="nav-signout-btn" id="navSignOutBtn" title="Sign Out">Sign Out →</button></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <ul class="mobile-links">
+      <li><a href="index.html#hero">Home</a></li>
+      <li><a href="index.html#domains">Domain</a></li>
+      <li><a href="index.html#events">Events</a></li>
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="index.html#team">Team</a></li>
+      <li><a href="dashboard.html" class="nav-dashboard-link" id="mobileNavDashboardLink">Dashboard</a></li>
+      <li><button type="button" class="nav-signout-btn" id="mobileSignOutBtn">Sign Out →</button></li>
+    </ul>
+  </div>
+
+
+  <!-- Main Student Portal Section -->
+  <main class="portal-shell-body">
+    <div class="portal-container">
+
+      <!-- Header Bar with Segmented View Switcher -->
+      <div class="portal-header-bar">
+        <div class="portal-title-block">
+          <h1 class="portal-main-heading" id="viewHeading">Upcoming Experiences</h1>
+          <p class="portal-subtitle" id="viewSubtitle">Discover summits, workshops, hackathons, and quantitative finance sessions.</p>
+        </div>
+
+        <!-- Segmented Tab Switcher -->
+        <div class="events-tabs portal-tabs-nav" role="tablist">
+          <button type="button" class="tab-btn active" id="tabAllEvents" role="tab" aria-selected="true">All Events</button>
+          <button type="button" class="tab-btn" id="tabJoinedEvents" role="tab" aria-selected="false">Joined Events</button>
+        </div>
+      </div>
+
+      <!-- Events Container (All Events / Joined Events Grid) -->
+      <section id="eventsSection" aria-live="polite">
+        <div class="portal-events-grid" id="eventsGrid">
+          <!-- Dynamically populated via student-portal.js -->
+        </div>
+
+        <!-- Empty Joined Events State -->
+        <div class="portal-empty-state" id="joinedEmptyState" style="display: none;">
+          <h2 class="portal-empty-title">No Joined Events Yet</h2>
+          <p class="portal-empty-desc">You have not registered for any upcoming events or workshops yet. Explore available club activities to start building your quantitative finance portfolio.</p>
+          <button type="button" class="btn btn-primary" id="browseEventsBtn">Browse All Events <span class="arrow">→</span></button>
+        </div>
+      </section>
+
+      <!-- Divider between main portal areas -->
+      <hr class="portal-section-divider">
+
+      <!-- ======================================================================
+           PART 1 — SESSION RECORDINGS SECTION
+           ====================================================================== -->
+      <section class="portal-section" id="recordingsSection" aria-labelledby="recordingsHeading">
+        <div class="portal-section-header">
+          <div class="portal-title-block">
+            <div class="join-modal-badge portal-badge-compact">ARCHIVE & MASTERCLASSES</div>
+            <h2 class="portal-section-heading" id="recordingsHeading">Session Recordings</h2>
+            <p class="portal-subtitle">Watch recordings of previous online workshops, technical masterclasses, and quant deep-dives.</p>
+          </div>
+        </div>
+
+        <div class="portal-recordings-grid" id="recordingsGrid">
+          <!-- Dynamically populated via student-portal.js -->
+        </div>
+      </section>
+
+      <!-- Divider between recordings and activity -->
+      <hr class="portal-section-divider">
+
+      <!-- ======================================================================
+           PART 3 — STUDENT ACTIVITY / TOTAL TIME SPENT SECTION
+           ====================================================================== -->
+      <section class="portal-section" id="activitySection" aria-labelledby="activityHeading">
+        <div class="portal-section-header">
+          <div class="portal-title-block">
+            <div class="join-modal-badge portal-badge-compact">STUDENT ENGAGEMENT</div>
+            <h2 class="portal-section-heading" id="activityHeading">Your Learning Activity</h2>
+            <p class="portal-subtitle">Track your accumulated learning time, masterclass reviews, and club participation.</p>
+          </div>
+        </div>
+
+        <!-- MATRIX Learning Activity Neo-Brutalist Visual -->
+        <div class="portal-activity-board">
+          <!-- Primary Total Time Spent Card -->
+          <div class="activity-hero-card">
+            <div class="activity-hero-header">
+              <span class="activity-live-indicator"><span class="activity-live-pulse"></span> ACTIVE SESSION</span>
+              <span class="activity-hero-tag">ACCUMULATED TIME</span>
+            </div>
+            <div class="activity-hero-main">
+              <div class="activity-hero-val" id="activityTotalTime">00h 00m</div>
+              <div class="activity-hero-lbl">TOTAL TIME SPENT</div>
+            </div>
+            <p class="activity-hero-footnote">Real-time tracked engagement across MATRIX FinTech Club portal sessions & masterclasses.</p>
+          </div>
+
+          <!-- Secondary Metric Breakdown Grid -->
+          <div class="activity-breakdown-row">
+            <div class="activity-subcard">
+              <div class="activity-subcard-header">
+                <span class="activity-subcard-icon">⚡</span>
+                <span class="activity-subcard-lbl">Portal Exploration</span>
+              </div>
+              <div class="activity-subcard-val" id="activityWebsiteTime">00h 00m</div>
+              <p class="activity-subcard-desc">Active browsing of upcoming events, agendas & member resources.</p>
+            </div>
+
+            <div class="activity-subcard">
+              <div class="activity-subcard-header">
+                <span class="activity-subcard-icon">▶</span>
+                <span class="activity-subcard-lbl">Recordings Watched</span>
+              </div>
+              <div class="activity-subcard-val" id="activityRecordingTime">00h 00m</div>
+              <p class="activity-subcard-desc" id="activitySessionsCount">0 masterclass sessions reviewed.</p>
+            </div>
+
+            <div class="activity-subcard">
+              <div class="activity-subcard-header">
+                <span class="activity-subcard-icon">◈</span>
+                <span class="activity-subcard-lbl">Registered Events</span>
+              </div>
+              <div class="activity-subcard-val" id="activityEventsCount">0</div>
+              <p class="activity-subcard-desc">Upcoming experiences and workshops reserved.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Reused Overlaid Event Detail Viewer Modal -->
+  <div class="portal-detail-backdrop" id="eventDetailModal" aria-hidden="true">
+    <div class="portal-detail-dialog">
+      <button type="button" class="join-modal-close" id="closeDetailModalBtn" aria-label="Close detail modal">&times;</button>
+      <div class="portal-detail-banner" id="detailBanner">
+        <span class="event-category" id="detailTypeBadge">WORKSHOP</span>
+      </div>
+      <div class="portal-detail-body">
+        <h2 class="portal-detail-title" id="detailTitle">Event Title</h2>
+        <div class="portal-detail-meta">
+          <span id="detailTime">📅 Time</span>
+          <span id="detailVenue">📍 Venue</span>
+        </div>
+        <p class="portal-detail-desc" id="detailDescription">Full event description text goes here.</p>
+        <div class="portal-card-actions" style="border-top: 1px solid var(--border); padding-top: 20px;">
+          <button type="button" class="btn btn-primary" id="detailJoinBtn">Join Event <span class="arrow">→</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reused Overlaid Recording Player & Details Modal -->
+  <div class="portal-detail-backdrop" id="recordingModal" aria-hidden="true">
+    <div class="portal-detail-dialog portal-recording-dialog">
+      <button type="button" class="join-modal-close" id="closeRecordingModalBtn" aria-label="Close recording modal">&times;</button>
+      
+      <!-- Video Prototype Player Surface -->
+      <div class="portal-video-player" id="videoPlayerSurface">
+        <div class="player-screen-overlay">
+          <div class="player-hud-top">
+            <span class="player-status-badge"><span class="activity-live-pulse"></span> ARCHIVE STREAM</span>
+            <span class="player-resolution-tag">1080P • 60 FPS</span>
+          </div>
+          
+          <div class="player-center-action">
+            <button type="button" class="player-play-btn" id="playerPlayBtn" aria-label="Toggle playback">
+              <span id="playerPlayIcon">▶</span>
+            </button>
+            <span class="player-state-label" id="playerStateLabel">Click to Start Session</span>
+          </div>
+
+          <div class="player-hud-bottom">
+            <div class="player-progress-bar-wrap" id="playerProgressWrap">
+              <div class="player-progress-fill" id="playerProgressFill" style="width: 0%;"></div>
+            </div>
+            <div class="player-controls-row">
+              <div class="player-time-display">
+                <span id="playerCurrentTime">00:00</span> / <span id="playerTotalDuration">54:00</span>
+              </div>
+              <div class="player-session-badge" id="playerCategoryBadge">ALGO WORKSHOP</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recording Meta & Notes -->
+      <div class="portal-detail-body">
+        <div class="portal-recording-header-meta">
+          <span class="event-category" id="recordingTypeBadge">ALGO WORKSHOP</span>
+          <span class="recording-meta-item" id="recordingDate">📅 Feb 10, 2026</span>
+          <span class="recording-meta-item" id="recordingDuration">⏱ 54m</span>
+        </div>
+        
+        <h2 class="portal-detail-title" id="recordingTitle" style="margin-top: 14px;">Recording Title</h2>
+        <div class="portal-recording-speaker" id="recordingSpeaker">🎙 Dr. Vikram Sethi • Quant Research Lead</div>
+        <p class="portal-detail-desc" id="recordingDescription" style="margin-top: 12px;">Full session description text goes here.</p>
+        
+        <div class="portal-recording-keynotes">
+          <h4 class="recording-notes-title">CORE TOPICS & KEY TAKEAWAYS</h4>
+          <ul class="recording-notes-list" id="recordingTakeawaysList">
+            <li>Level 2 limit order book matching mechanics and queue priority models.</li>
+            <li>Python order execution simulation codebase and slippage backtesting framework.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shared Store and Student Portal Script -->
+  <script src="portal-store.js"></script>
+  <script src="student-portal.js"></script>
+</body>
+</html>

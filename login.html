@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal Login | MATRIX FinTech Club</title>
+  <meta name="description" content="Sign in to the MATRIX FinTech Club Portal for students and administrators.">
+
+  <!-- Google Fonts (Inherited from Design System) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Canonical and Extension Stylesheets -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="portal.css">
+</head>
+<body class="portal-shell">
+
+  <!-- Canonical Consistent Navbar -->
+  <nav id="navbar" class="navbar habito-navbar">
+    <div class="nav-container habito-nav-container">
+      <a href="index.html" class="nav-brand habito-brand" aria-label="Fitech Home">
+        <span class="nav-brand-name habito-brand-name">Fitech</span>
+      </a>
+      <ul class="nav-links habito-nav-links" id="navLinks">
+        <li><a href="index.html#hero">Home</a></li>
+        <li><a href="index.html#domains">Domain</a></li>
+        <li><a href="index.html#events">Events</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="index.html#team">Team</a></li>
+        <li><a href="dashboard.html" class="nav-dashboard-link" id="navDashboardLink">Dashboard</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <ul class="mobile-links">
+      <li><a href="index.html#hero">Home</a></li>
+      <li><a href="index.html#domains">Domain</a></li>
+      <li><a href="index.html#events">Events</a></li>
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="index.html#team">Team</a></li>
+      <li><a href="dashboard.html" class="nav-dashboard-link" id="mobileNavDashboardLink">Dashboard</a></li>
+      <li><a href="login.html" class="mobile-cta">Join MATRIX →</a></li>
+    </ul>
+  </div>
+
+  <!-- Centered Login Section -->
+  <main class="portal-login-section">
+    <div class="portal-login-container">
+
+      <!-- Student Login Card (Default State) -->
+      <div class="portal-login-card join-modal-container card-active" id="studentLoginCard">
+        <div class="join-modal-header">
+          <div class="join-modal-badge">MEMBER AUTHENTICATION</div>
+          <h1 class="join-modal-title">WELCOME</h1>
+          <p class="join-modal-subtitle">Sign in to discover upcoming events, workshops, and lab sessions.</p>
+        </div>
+
+        <form id="studentLoginForm" class="portal-login-form" novalidate>
+          <div class="form-group">
+            <label for="studentEmailInput">EMAIL ADDRESS <span class="req">*</span></label>
+            <input 
+              type="email" 
+              id="studentEmailInput" 
+              name="studentEmail" 
+              placeholder="Enter Registered Email ID" 
+              required
+              autocomplete="email"
+            >
+            <div class="portal-field-error" id="studentEmailError" aria-live="polite"></div>
+          </div>
+
+          <div class="form-actions" style="margin-top: 20px;">
+            <button type="submit" class="join-submit-btn" id="studentLoginBtn">
+              SIGN IN <span class="arrow">→</span>
+            </button>
+          </div>
+        </form>
+
+        <div class="portal-login-footer">
+          <p class="portal-prompt-text">
+            Not registered yet? <a href="#" class="habito-action-link" id="triggerJoinUsModal">Join us <span class="arrow">→</span></a>
+          </p>
+        </div>
+
+        <div class="portal-mode-switch-wrapper">
+          <button type="button" class="portal-switch-btn" id="switchToAdminBtn" aria-label="Switch to Admin Login">
+            Login as Admin <span class="arrow">→</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Admin Login Card (Switched Mode) -->
+      <div class="portal-login-card join-modal-container" id="adminLoginCard" style="display: none;">
+        <div class="join-modal-header">
+          <div class="join-modal-badge">ADMINISTRATIVE ACCESS</div>
+          <h1 class="join-modal-title">Admin Login</h1>
+          <p class="join-modal-subtitle">Enter administrator credentials to manage club activities.</p>
+        </div>
+
+        <form id="adminLoginForm" class="portal-login-form" novalidate>
+          <div class="form-group">
+            <label for="adminIdInput">ADMIN IDENTIFIER / EMAIL <span class="req">*</span></label>
+            <input 
+              type="text" 
+              id="adminIdInput" 
+              name="adminId" 
+              placeholder="admin@matrix.club" 
+              required
+              autocomplete="username"
+            >
+            <div class="portal-field-error" id="adminIdError" aria-live="polite"></div>
+          </div>
+
+          <div class="form-actions" style="margin-top: 20px;">
+            <button type="submit" class="join-submit-btn" id="adminLoginBtn">
+              ACCESS ADMIN PORTAL <span class="arrow">→</span>
+            </button>
+          </div>
+        </form>
+
+        <div class="portal-mode-switch-wrapper" style="margin-top: 24px;">
+          <button type="button" class="portal-switch-btn" id="switchToStudentBtn" aria-label="Back to Student Login">
+            ← Back to Student Login
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Reused Member Registration Modal (Direct Integration) -->
+  <div class="join-modal-backdrop" id="joinModalBackdrop" aria-hidden="true">
+    <div class="join-modal-container">
+      <button type="button" class="join-modal-close" id="closeJoinModalBtn" aria-label="Close modal">&times;</button>
+      <div class="join-modal-header">
+        <div class="join-modal-badge">MEMBER REGISTRATION</div>
+        <h2 class="join-modal-title">Join MATRIX FinTech Club</h2>
+        <p class="join-modal-subtitle">Enter your academic details below to connect with MATRIX.</p>
+      </div>
+
+      <form id="joinSpreadsheetForm" class="join-modal-form">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="studentName">Name <span class="req">*</span></label>
+            <input type="text" id="studentName" name="name" placeholder="Full Name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="regNumber">Registration Number <span class="req">*</span></label>
+            <input type="text" id="regNumber" name="regNumber" placeholder="Registration Number" required>
+          </div>
+
+          <div class="form-group">
+            <label for="rollNumber">Roll Number <span class="req">*</span></label>
+            <input type="text" id="rollNumber" name="rollNumber" placeholder="Roll Number" required>
+          </div>
+
+          <div class="form-group">
+            <label for="studentSchool">School <span class="req">*</span></label>
+            <input type="text" id="studentSchool" name="school" placeholder="School" required>
+          </div>
+
+          <div class="form-group">
+            <label for="studentDept">Department <span class="req">*</span></label>
+            <input type="text" id="studentDept" name="department" placeholder="Department" required>
+          </div>
+
+          <div class="form-group">
+            <label for="studentSection">Section <span class="req">*</span></label>
+            <input type="text" id="studentSection" name="section" placeholder="Section" required>
+          </div>
+
+          <div class="form-group">
+            <label for="currentYear">Current Year <span class="req">*</span></label>
+            <select id="currentYear" name="currentYear" required>
+              <option value="" disabled selected>Select Current Year</option>
+              <option value="1st Year">1st Year</option>
+              <option value="2nd Year">2nd Year</option>
+              <option value="3rd Year">3rd Year</option>
+              <option value="4th Year">4th Year</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="contactNumber">Contact Number <span class="req">*</span></label>
+            <input type="tel" id="contactNumber" name="contactNumber" placeholder="Contact Number" required>
+          </div>
+
+          <div class="form-group">
+            <label for="regModalEmail">Gmail <span class="req">*</span></label>
+            <input type="email" id="regModalEmail" name="gmail" placeholder="your.name@gmail.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="interestedDomain">Interested Domain <span class="req">*</span></label>
+            <select id="interestedDomain" name="interestedDomain" required>
+              <option value="" disabled selected>Select Interested Domain</option>
+              <option value="Quantitative Finance & Algo">Quantitative Finance & Algo</option>
+              <option value="AI & Machine Learning">AI & Machine Learning</option>
+              <option value="Blockchain & Crypto Web3">Blockchain & Crypto Web3</option>
+              <option value="Full-Stack Software Engineering">Full-Stack Software Engineering</option>
+              <option value="Trading & Financial Markets">Trading & Financial Markets</option>
+              <option value="Data Analytics & Research">Data Analytics & Research</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-actions" style="margin-top: 24px;">
+          <button type="submit" class="join-submit-btn">
+            Submit Registration <span class="arrow">→</span>
+          </button>
+        </div>
+      </form>
+
+      <div class="join-success-state" id="joinSuccessState" style="display: none;">
+        <div class="success-icon-circle">✓</div>
+        <h3>Welcome to MATRIX!</h3>
+        <p>Your registration details have been submitted successfully.</p>
+        <button type="button" class="join-done-btn" id="closeSuccessBtn">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shared Store and Login Page Logic -->
+  <script src="portal-store.js"></script>
+  <script src="login.js"></script>
+</body>
+</html>

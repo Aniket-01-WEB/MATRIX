@@ -991,7 +991,10 @@ function initJoinModal() {
   if (closeSuccessBtn) closeSuccessBtn.addEventListener('click', closeModal);
 
   document.querySelectorAll('.trigger-join-modal, .nav-cta').forEach(btn => {
-    btn.addEventListener('click', openModal);
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.location.href = 'login.html';
+    });
   });
 
   backdrop.addEventListener('click', (e) => {
