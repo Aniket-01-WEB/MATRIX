@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting to MATRIX Dashboard...</title>
+  <script src="portal-store.js"></script>
+  <script>
+    (function () {
+      var dest = 'login.html';
+      if (window.PortalStore && typeof window.PortalStore.getDashboardUrl === 'function') {
+        dest = window.PortalStore.getDashboardUrl();
+      } else {
+        try {
+          var raw = localStorage.getItem('matrix_current_user');
+          if (raw) {
+            var user = JSON.parse(raw);
+            if (user && user.role === 'student') dest = 'student-portal.html';
+            else if (user && user.role === 'admin') dest = 'admin-portal.html';
+          }
+        } catch (e) {}
+      }
+      window.location.replace(dest);
+    })();
+  </script>
+</head>
+<body style="background:#ffffff; font-family:sans-serif; display:flex; align-items:center; justify-content:center; height:100vh; margin:0;">
+  <p style="color:#64748b; font-size:14px;">Redirecting to your MATRIX Dashboard...</p>
+</body>
+</html>
